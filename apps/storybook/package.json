@@ -1,0 +1,35 @@
+{
+  "name": "@lumo-ui/storybook",
+  "version": "0.1.0",
+  "description": "Storybook for Lumo UI components",
+  "private": true,
+  "scripts": {
+    "dev": "storybook dev -p 6006",
+    "build": "storybook build",
+    "serve": "http-server storybook-static --port 6006 --silent",
+    "clean": "rm -rf storybook-static node_modules"
+  },
+  "dependencies": {
+    "@lumo-ui/core": "workspace:*",
+    "@lumo-ui/utils": "workspace:*",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^1.9.0",
+    "@storybook/addon-essentials": "^8.4.2",
+    "@storybook/addon-interactions": "^8.4.2",
+    "@storybook/addon-links": "^8.4.2",
+    "@storybook/blocks": "^8.4.2",
+    "@storybook/react-vite": "^8.4.2",
+    "@storybook/test": "^8.4.2",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "15.0.0",
+    "eslint-plugin-storybook": "^0.9.0",
+    "http-server": "^14.1.1",
+    "storybook": "^8.4.2",
+    "typescript": "^5.6.2"
+  }
+}

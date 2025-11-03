@@ -1,0 +1,24 @@
+{
+  "extends": "../../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "../../../",
+    "paths": {
+      "@/*": ["./apps/www/*"],
+      "@lumo-ui/core": ["./packages/core/src"],
+      "@lumo-ui/hooks": ["./packages/hooks/src"],
+      "@lumo-ui/utils": ["./packages/utils/src"]
+    },
+    "types": ["node", "@storybook/react/types"],
+    "allowJs": true,
+    "checkJs": false
+  },
+  "include": [
+    "../stories/**/*",
+    "../.storybook/**/*",
+    "../../../packages/**/src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
