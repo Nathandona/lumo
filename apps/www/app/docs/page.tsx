@@ -77,7 +77,7 @@ export default function DocsPage() {
 
         {/* Content */}
         <main className="min-w-0 max-w-3xl">
-          <header>
+          <header data-reveal>
             <p className="font-mono text-xs uppercase tracking-[0.22em] text-honey">Docs</p>
             <h1 className="mt-3 font-display text-4xl font-bold tracking-tight md:text-5xl">
               Build in the light.
@@ -88,7 +88,7 @@ export default function DocsPage() {
           </header>
 
           {/* Installation */}
-          <section id="installation" className="mt-16 scroll-mt-28">
+          <section id="installation" data-reveal className="mt-16 scroll-mt-28">
             <h2 className="font-display text-2xl font-bold tracking-tight">Installation</h2>
             <p className="mt-2 text-muted-foreground">
               Add any block straight into your repo with the shadcn CLI. Dependencies come with it.
@@ -120,7 +120,7 @@ export default function DocsPage() {
           </section>
 
           {/* Configuration */}
-          <section id="configuration" className="mt-16 scroll-mt-28">
+          <section id="configuration" data-reveal className="mt-16 scroll-mt-28">
             <h2 className="font-display text-2xl font-bold tracking-tight">Configuration</h2>
             <p className="mt-2 text-muted-foreground">Point Tailwind at the source, then tune the theme tokens.</p>
             <div className="mt-5 grid gap-5 md:grid-cols-2">
@@ -146,7 +146,7 @@ export default function DocsPage() {
           </section>
 
           {/* Usage */}
-          <section id="usage" className="mt-16 scroll-mt-28">
+          <section id="usage" data-reveal className="mt-16 scroll-mt-28">
             <h2 className="font-display text-2xl font-bold tracking-tight">Basic usage</h2>
             <p className="mt-2 text-muted-foreground">Import the block you installed and compose it.</p>
             <div className="mt-5">
@@ -167,7 +167,7 @@ export function App({ product }) {
           </section>
 
           {/* Why Lumo */}
-          <section id="why" className="mt-16 scroll-mt-28">
+          <section id="why" data-reveal className="mt-16 scroll-mt-28">
             <h2 className="font-display text-2xl font-bold tracking-tight">Why Lumo</h2>
             <div className="mt-6 grid gap-x-8 gap-y-8 sm:grid-cols-2">
               {features.map((f) => (
@@ -185,7 +185,7 @@ export function App({ product }) {
           </section>
 
           {/* CTA */}
-          <section className="mt-16 overflow-hidden rounded-[1.75rem] bg-[linear-gradient(150deg,var(--amberglow),var(--honey)_55%,var(--honey-2))] px-8 py-12 text-center">
+          <section data-reveal className="mt-16 overflow-hidden rounded-[1.75rem] bg-[linear-gradient(150deg,var(--amberglow),var(--honey)_55%,var(--honey-2))] px-8 py-12 text-center">
             <h2 className="font-display text-3xl font-bold tracking-tight text-[hsl(var(--primary-foreground))]">
               Drop your first component.
             </h2>

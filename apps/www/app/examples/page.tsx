@@ -7,7 +7,7 @@ export default function ExamplesPage() {
       <Header />
 
       <div className="mx-auto max-w-6xl px-6 py-12">
-        <header className="max-w-2xl">
+        <header data-reveal className="max-w-2xl">
           <p className="font-mono text-xs uppercase tracking-[0.22em] text-honey">Examples</p>
           <h1 className="mt-3 font-display text-4xl font-bold tracking-tight md:text-5xl">
             A storefront, fully lit.
@@ -18,7 +18,7 @@ export default function ExamplesPage() {
           </p>
         </header>
 
-        <div className="glass mt-10 rounded-3xl p-8 md:p-10">
+        <div data-reveal className="glass mt-10 rounded-3xl p-8 md:p-10">
           <ProductShowcase />
         </div>
       </div>
