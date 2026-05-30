@@ -1,5 +1,10 @@
 // Cart management hooks
-export { useCart } from './use-cart'
+export { CartProvider, useCart } from './use-cart'
+export type {
+  CartContextValue,
+  CartProviderProps,
+  CartProductRef,
+} from './use-cart'
 export { useWishlist } from './use-wishlist'
 
 // Product interaction hooks
