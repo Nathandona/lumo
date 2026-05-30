@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "lumo",
+  "homepage": "https://lumo.dev",
+  "items": [
+    {
+      "name": "lib",
+      "type": "registry:lib",
+      "title": "Lumo commerce model and money utilities",
+      "description": "The canonical commerce data model (Product, Variant, Money, CartLine, Address) and minor-unit-aware money helpers that every Lumo block builds on. Map your backend onto these types once.",
+      "files": [
+        {
+          "path": "packages/utils/src/types.ts",
+          "type": "registry:lib",
+          "target": "lib/lumo/types.ts"
+        },
+        {
+          "path": "packages/utils/src/format-money.ts",
+          "type": "registry:lib",
+          "target": "lib/lumo/money.ts"
+        }
+      ]
+    }
+  ]
+}

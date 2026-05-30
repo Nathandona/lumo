@@ -1,5 +1,14 @@
 module.exports = {
   root: true,
+  ignorePatterns: [
+    'dist/',
+    'build/',
+    'coverage/',
+    'node_modules/',
+    '.next/',
+    '.turbo/',
+    'storybook-static/'
+  ],
   extends: [
     'eslint:recommended',
     'prettier'
@@ -42,9 +51,33 @@ module.exports = {
   },
   overrides: [
     {
+      files: ['**/*.ts', '**/*.tsx'],
+      parser: '@typescript-eslint/parser',
+      parserOptions: {
+        ecmaVersion: 2022,
+        sourceType: 'module',
+        ecmaFeatures: {
+          jsx: true
+        }
+      },
+      plugins: ['@typescript-eslint'],
+      rules: {
+        // Let the TypeScript-aware rule handle unused detection; the base rule
+        // misfires on type-only and interface usages.
+        'no-unused-vars': 'off',
+        '@typescript-eslint/no-unused-vars': [
+          'error',
+          { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }
+        ]
+      }
+    },
+    {
       files: ['**/*.test.ts', '**/*.test.tsx', '**/*.spec.ts', '**/*.spec.tsx'],
       env: {
         jest: true
+      },
+      globals: {
+        vi: 'readonly'
       }
     }
   ]

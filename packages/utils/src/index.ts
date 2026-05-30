@@ -1,3 +1,30 @@
+// Canonical commerce data model
+export type {
+  CurrencyCode,
+  Money,
+  Image,
+  ProductOption,
+  SelectedOption,
+  Variant,
+  ProductRating,
+  Product,
+  CartLine,
+  Cart,
+  Address,
+} from './types'
+
+// Money utilities (minor-unit aware, multi-currency)
+export {
+  formatMoney,
+  toMajorUnits,
+  toMinorUnits,
+  getCurrencyFractionDigits,
+  zeroMoney,
+  addMoney,
+  multiplyMoney,
+  discountPercent,
+} from './format-money'
+
 // Formatting utilities
 export { formatCurrency } from './format-currency'
 export { formatDiscount } from './format-discount'

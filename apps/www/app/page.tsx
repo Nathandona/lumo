@@ -1,5 +1,6 @@
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Header } from "@/components/header"
 import { ProductShowcase } from "@/components/product-showcase"
 import { ArrowRight, CheckCircle, Zap, Shield, Palette, Code, Sparkles, Github, Star } from "lucide-react"
@@ -179,9 +180,9 @@ export default function HomePage() {
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             <Button variant="outline" size="lg" className="text-lg px-8 hover-lift" asChild>
-              <a href="/components">
+              <Link href="/components">
                 Browse Components
-              </a>
+              </Link>
             </Button>
           </div>
         </div>
@@ -200,17 +201,17 @@ export default function HomePage() {
             <div>
               <h4 className="font-semibold mb-4">Product</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="/components" className="hover:text-foreground transition-colors">Components</a></li>
-                <li><a href="/docs" className="hover:text-foreground transition-colors">Documentation</a></li>
-                <li><a href="/examples" className="hover:text-foreground transition-colors">Examples</a></li>
+                <li><Link href="/components" className="hover:text-foreground transition-colors">Components</Link></li>
+                <li><Link href="/docs" className="hover:text-foreground transition-colors">Documentation</Link></li>
+                <li><Link href="/examples" className="hover:text-foreground transition-colors">Examples</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Resources</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="/docs/installation" className="hover:text-foreground transition-colors">Installation</a></li>
-                <li><a href="/docs/theming" className="hover:text-foreground transition-colors">Theming</a></li>
-                <li><a href="/docs/accessibility" className="hover:text-foreground transition-colors">Accessibility</a></li>
+                <li><Link href="/docs/installation" className="hover:text-foreground transition-colors">Installation</Link></li>
+                <li><Link href="/docs/theming" className="hover:text-foreground transition-colors">Theming</Link></li>
+                <li><Link href="/docs/accessibility" className="hover:text-foreground transition-colors">Accessibility</Link></li>
               </ul>
             </div>
             <div>

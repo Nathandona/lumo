@@ -2,15 +2,12 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { Github, Menu, X, Search } from "lucide-react"
+import { Github, Menu, Search } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Button } from "@/components/ui/button"
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
 
