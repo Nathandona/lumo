@@ -3,6 +3,7 @@ import { Bricolage_Grotesque, Hanken_Grotesk, JetBrains_Mono } from "next/font/g
 import "./globals.css"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
+import { ScrollReveal } from "@/components/scroll-reveal"
 
 const display = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -51,9 +52,15 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={`${display.variable} ${sans.variable} ${mono.variable}`}>
       <body>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "try{document.documentElement.classList.add('js-reveal')}catch(e){}",
+          }}
+        />
         <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light" enableSystem={false}>
           {children}
         </ThemeProvider>
+        <ScrollReveal />
         <Analytics />
       </body>
     </html>

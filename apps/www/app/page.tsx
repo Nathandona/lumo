@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react"
 import Link from "next/link"
 import { ArrowRight, ShieldCheck, Boxes, Infinity as InfinityIcon } from "lucide-react"
 import { ProductCard, type Product } from "@lumo-ui/core"
@@ -88,12 +89,17 @@ export default function HomePage() {
 
       {/* Features — divided columns, no boxed cards */}
       <section className="mx-auto max-w-6xl px-6 py-20">
-        <h2 className="max-w-[18ch] font-display text-3xl font-bold tracking-tight md:text-4xl">
+        <h2 data-reveal className="max-w-[18ch] font-display text-3xl font-bold tracking-tight md:text-4xl">
           Components built for builders, lit for the light.
         </h2>
         <div className="mt-12 grid gap-10 md:grid-cols-3 md:gap-0">
           {features.map((f, i) => (
-            <div key={f.title} className={i > 0 ? "md:border-l md:border-border md:pl-10" : "md:pr-10"}>
+            <div
+              key={f.title}
+              data-reveal
+              style={{ "--reveal-delay": `${i * 80}ms` } as CSSProperties}
+              className={i > 0 ? "md:border-l md:border-border md:pl-10" : "md:pr-10"}
+            >
               <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[linear-gradient(150deg,var(--amberglow),var(--honey-2))] text-[hsl(var(--primary-foreground))]">
                 <f.icon className="h-5 w-5" strokeWidth={2} />
               </div>
@@ -106,14 +112,14 @@ export default function HomePage() {
 
       {/* Live component demo (real @lumo-ui/core blocks) */}
       <section className="mx-auto max-w-6xl px-6 py-12">
-        <div className="glass rounded-3xl p-8 md:p-10">
+        <div data-reveal className="glass rounded-3xl p-8 md:p-10">
           <ProductShowcase />
         </div>
       </section>
 
       {/* CTA band */}
       <section className="mx-auto max-w-6xl px-6 py-24">
-        <div className="overflow-hidden rounded-[2rem] bg-[linear-gradient(150deg,var(--amberglow),var(--honey)_55%,var(--honey-2))] px-8 py-16 text-center shadow-[0_40px_90px_-40px_rgba(255,176,32,0.7)]">
+        <div data-reveal className="overflow-hidden rounded-[2rem] bg-[linear-gradient(150deg,var(--amberglow),var(--honey)_55%,var(--honey-2))] px-8 py-16 text-center shadow-[0_40px_90px_-40px_rgba(255,176,32,0.7)]">
           <h2 className="mx-auto max-w-[20ch] font-display text-4xl font-bold leading-tight tracking-tight text-[hsl(var(--primary-foreground))] md:text-5xl">
             Start building in the light.
           </h2>
