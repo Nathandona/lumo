@@ -1,17 +1,27 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { ProductCard, type Product } from '../src/components/product-card'
+import type { Product, Variant } from '@lumo-ui/utils'
+import { ProductCard } from '../src/components/product-card'
+
+const mockVariant: Variant = {
+  id: 'v1',
+  sku: 'SKU-1',
+  price: { amount: 9999, currency: 'USD' },
+  compareAtPrice: { amount: 14999, currency: 'USD' },
+  selectedOptions: [],
+  available: true,
+}
 
 const mockProduct: Product = {
   id: '1',
-  name: 'Test Product',
-  price: 99.99,
-  image: 'https://example.com/image.jpg',
-  badge: 'sale',
-  originalPrice: 149.99,
-  rating: 4.5,
-  reviewCount: 25,
-  description: 'Test product description'
+  handle: 'test-product',
+  title: 'Test Product',
+  description: 'Test product description',
+  images: [{ url: 'https://example.com/image.jpg' }],
+  options: [],
+  variants: [mockVariant],
+  rating: { value: 4.5, count: 25 },
+  badges: ['sale'],
 }
 
 describe('ProductCard', () => {
@@ -23,207 +33,110 @@ describe('ProductCard', () => {
     vi.clearAllMocks()
   })
 
-  it('renders product information correctly', () => {
-    render(
+  function renderCard(props = {}) {
+    return render(
       <ProductCard
         product={mockProduct}
         onAddToCart={mockOnAddToCart}
         onQuickView={mockOnQuickView}
         onToggleWishlist={mockOnToggleWishlist}
+        {...props}
       />
     )
+  }
+
+  it('renders product information correctly', () => {
+    renderCard()
 
     expect(screen.getByAltText('Test Product')).toBeInTheDocument()
     expect(screen.getByText('Test Product')).toBeInTheDocument()
     expect(screen.getByText('$99.99')).toBeInTheDocument()
     expect(screen.getByText('$149.99')).toBeInTheDocument()
-    expect(screen.getByText('Sale')).toBeInTheDocument()
+    expect(screen.getByText('sale')).toBeInTheDocument()
     expect(screen.getByText('(25)')).toBeInTheDocument()
   })
 
   it('displays discount percentage correctly', () => {
-    render(
-      <ProductCard
-        product={mockProduct}
-        onAddToCart={mockOnAddToCart}
-        onQuickView={mockOnQuickView}
-        onToggleWishlist={mockOnToggleWishlist}
-      />
-    )
-
+    renderCard()
     expect(screen.getByText('-33%')).toBeInTheDocument()
   })
 
-  it('calls onAddToCart when add to cart button is clicked', async () => {
+  it('calls onAddToCart with the product and resolved variant', async () => {
     const user = userEvent.setup()
+    renderCard()
 
-    render(
-      <ProductCard
-        product={mockProduct}
-        onAddToCart={mockOnAddToCart}
-        onQuickView={mockOnQuickView}
-        onToggleWishlist={mockOnToggleWishlist}
-      />
-    )
+    await user.click(screen.getByLabelText(/Add Test Product to cart/))
 
-    const addToCartButton = screen.getByLabelText(/Add Test Product to cart/)
-    await user.click(addToCartButton)
-
-    expect(mockOnAddToCart).toHaveBeenCalledWith(mockProduct)
+    expect(mockOnAddToCart).toHaveBeenCalledWith(mockProduct, mockVariant)
     expect(mockOnAddToCart).toHaveBeenCalledTimes(1)
   })
 
-  it('shows quick actions on hover', async () => {
-    render(
-      <ProductCard
-        product={mockProduct}
-        onAddToCart={mockOnAddToCart}
-        onQuickView={mockOnQuickView}
-        onToggleWishlist={mockOnToggleWishlist}
-        showQuickActions={true}
-      />
-    )
+  it('shows quick actions', () => {
+    renderCard({ showQuickActions: true })
 
-    const quickViewButton = screen.getByLabelText('Quick view')
-    const wishlistButton = screen.getByLabelText('Add to wishlist')
-
-    expect(quickViewButton).toBeInTheDocument()
-    expect(wishlistButton).toBeInTheDocument()
+    expect(screen.getByLabelText('Quick view Test Product')).toBeInTheDocument()
+    expect(screen.getByLabelText('Add to wishlist')).toBeInTheDocument()
   })
 
-  it('calls onToggleWishlist when wishlist button is clicked', async () => {
+  it('calls onToggleWishlist when the wishlist button is clicked', async () => {
     const user = userEvent.setup()
+    renderCard()
 
-    render(
-      <ProductCard
-        product={mockProduct}
-        onAddToCart={mockOnAddToCart}
-        onQuickView={mockOnQuickView}
-        onToggleWishlist={mockOnToggleWishlist}
-      />
-    )
-
-    const wishlistButton = screen.getByLabelText('Add to wishlist')
-    await user.click(wishlistButton)
+    await user.click(screen.getByLabelText('Add to wishlist'))
 
     expect(mockOnToggleWishlist).toHaveBeenCalledWith(mockProduct)
     expect(mockOnToggleWishlist).toHaveBeenCalledTimes(1)
   })
 
-  it('calls onQuickView when quick view button is clicked', async () => {
+  it('calls onQuickView when the quick view button is clicked', async () => {
     const user = userEvent.setup()
+    renderCard()
 
-    render(
-      <ProductCard
-        product={mockProduct}
-        onAddToCart={mockOnAddToCart}
-        onQuickView={mockOnQuickView}
-        onToggleWishlist={mockOnToggleWishlist}
-      />
-    )
-
-    const quickViewButton = screen.getByLabelText('Quick view')
-    await user.click(quickViewButton)
+    await user.click(screen.getByLabelText('Quick view Test Product'))
 
     expect(mockOnQuickView).toHaveBeenCalledWith(mockProduct)
     expect(mockOnQuickView).toHaveBeenCalledTimes(1)
   })
 
-  it('displays wishlist filled state when isInWishlist is true', () => {
-    render(
-      <ProductCard
-        product={mockProduct}
-        onAddToCart={mockOnAddToCart}
-        onQuickView={mockOnQuickView}
-        onToggleWishlist={mockOnToggleWishlist}
-        isInWishlist={true}
-      />
-    )
-
-    const wishlistButton = screen.getByLabelText('Remove from wishlist')
-    expect(wishlistButton).toBeInTheDocument()
+  it('displays the filled wishlist state when isInWishlist is true', () => {
+    renderCard({ isInWishlist: true })
+    expect(screen.getByLabelText('Remove from wishlist')).toBeInTheDocument()
   })
 
-  it('does not show quick actions when showQuickActions is false', () => {
-    render(
-      <ProductCard
-        product={mockProduct}
-        onAddToCart={mockOnAddToCart}
-        onQuickView={mockOnQuickView}
-        onToggleWishlist={mockOnToggleWishlist}
-        showQuickActions={false}
-      />
-    )
+  it('hides quick actions when showQuickActions is false', () => {
+    renderCard({ showQuickActions: false })
 
-    expect(screen.queryByLabelText('Quick view')).not.toBeInTheDocument()
+    expect(screen.queryByLabelText('Quick view Test Product')).not.toBeInTheDocument()
     expect(screen.queryByLabelText('Add to wishlist')).not.toBeInTheDocument()
   })
 
-  it('renders different badge types correctly', () => {
-    const newProduct = { ...mockProduct, badge: 'new' as const }
-    const limitedProduct = { ...mockProduct, badge: 'limited' as const }
+  it('renders custom badges', () => {
+    const { rerender } = render(<ProductCard product={{ ...mockProduct, badges: ['new'] }} />)
+    expect(screen.getByText('new')).toBeInTheDocument()
 
-    const { rerender } = render(
-      <ProductCard
-        product={newProduct}
-        onAddToCart={mockOnAddToCart}
-        onQuickView={mockOnQuickView}
-        onToggleWishlist={mockOnToggleWishlist}
-      />
-    )
-
-    expect(screen.getByText('New')).toBeInTheDocument()
-
-    rerender(
-      <ProductCard
-        product={limitedProduct}
-        onAddToCart={mockOnAddToCart}
-        onQuickView={mockOnQuickView}
-        onToggleWishlist={mockOnToggleWishlist}
-      />
-    )
-
-    expect(screen.getByText('Limited')).toBeInTheDocument()
+    rerender(<ProductCard product={{ ...mockProduct, badges: ['limited'] }} />)
+    expect(screen.getByText('limited')).toBeInTheDocument()
   })
 
-  it('does not display original price when not provided', () => {
-    const productWithoutOriginalPrice = {
-      ...mockProduct,
-      originalPrice: undefined
-    }
+  it('does not display the compare-at price when not provided', () => {
+    const variant: Variant = { ...mockVariant, compareAtPrice: undefined }
+    render(<ProductCard product={{ ...mockProduct, variants: [variant] }} />)
 
-    render(
-      <ProductCard
-        product={productWithoutOriginalPrice}
-        onAddToCart={mockOnAddToCart}
-        onQuickView={mockOnQuickView}
-        onToggleWishlist={mockOnToggleWishlist}
-      />
-    )
-
-    // Regular price should still be displayed
     expect(screen.getByText('$99.99')).toBeInTheDocument()
-    // Original price should not be displayed
     expect(screen.queryByText('$149.99')).not.toBeInTheDocument()
   })
 
-  it('has proper accessibility attributes', () => {
-    render(
-      <ProductCard
-        product={mockProduct}
-        onAddToCart={mockOnAddToCart}
-        onQuickView={mockOnQuickView}
-        onToggleWishlist={mockOnToggleWishlist}
-      />
-    )
+  it('marks the product as sold out and disables add to cart', () => {
+    const variant: Variant = { ...mockVariant, available: false }
+    renderCard({ product: { ...mockProduct, variants: [variant] } })
 
+    expect(screen.getByText('Sold out')).toBeInTheDocument()
+    expect(screen.getByLabelText(/Add Test Product to cart/)).toBeDisabled()
+  })
+
+  it('has an accessible add to cart label', () => {
+    renderCard()
     const addToCartButton = screen.getByRole('button', { name: /Add Test Product to cart/ })
     expect(addToCartButton).toHaveAttribute('aria-label', 'Add Test Product to cart')
-
-    const quickViewButton = screen.getByRole('button', { name: /Quick view/ })
-    expect(quickViewButton).toHaveAttribute('aria-label', 'Quick view')
-
-    const wishlistButton = screen.getByRole('button', { name: /Add to wishlist/ })
-    expect(wishlistButton).toHaveAttribute('aria-label', 'Add to wishlist')
   })
 })

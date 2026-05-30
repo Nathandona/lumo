@@ -208,6 +208,12 @@ importers:
 
   packages/core:
     dependencies:
+      '@lumo-ui/utils':
+        specifier: workspace:*
+        version: link:../utils
+      '@radix-ui/react-dialog':
+        specifier: ^1.1.1
+        version: 1.1.15(@types/react-dom@18.3.7(@types/react@18.3.26))(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-slot':
         specifier: ^1.1.0
         version: 1.2.3(@types/react@18.3.26)(react@18.3.1)
@@ -269,6 +275,9 @@ importers:
 
   packages/hooks:
     dependencies:
+      '@lumo-ui/utils':
+        specifier: workspace:*
+        version: link:../utils
       '@radix-ui/react-use-callback-ref':
         specifier: ^1.1.0
         version: 1.1.1(@types/react@18.3.26)(react@18.3.1)
