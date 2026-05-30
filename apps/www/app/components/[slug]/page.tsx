@@ -3,7 +3,8 @@ import { ComponentPreview } from "@/components/component-preview"
 import { ComponentCode } from "@/components/component-code"
 import { ComponentProps } from "@/components/component-props"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, Copy, Github } from "lucide-react"
+import { ArrowLeft, Copy } from "lucide-react"
+import { GithubIcon } from "@/components/icons"
 import Link from "next/link"
 
 const componentData = {
@@ -125,7 +126,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="hover-lift">
               Get Started
-              <Github className="ml-2 h-4 w-4" />
+              <GithubIcon className="ml-2 h-4 w-4" />
             </Button>
             <Button variant="outline" size="lg" asChild>
               <Link href="/docs">

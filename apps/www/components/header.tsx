@@ -2,7 +2,8 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { Github, Menu, Search } from "lucide-react"
+import { Menu, Search } from "lucide-react"
+import { GithubIcon } from "@/components/icons"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Button } from "@/components/ui/button"
 import {
@@ -73,7 +74,7 @@ export function Header() {
                 rel="noopener noreferrer"
                 className="flex items-center space-x-2"
               >
-                <Github className="h-4 w-4" />
+                <GithubIcon className="h-4 w-4" />
                 <span className="hidden sm:inline">GitHub</span>
               </a>
             </Button>
@@ -109,7 +110,7 @@ function MobileHeader({ navigation }: { navigation: Array<{ name: string; href: 
             rel="noopener noreferrer"
             className="flex items-center space-x-2"
           >
-            <Github className="h-4 w-4" />
+            <GithubIcon className="h-4 w-4" />
             <span>GitHub</span>
           </a>
         </Button>
