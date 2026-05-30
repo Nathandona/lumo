@@ -1,10 +1,10 @@
 import * as React from "react"
 import { X } from "lucide-react"
-import type { CartLine } from "@lumo-ui/utils"
+import type { CartLine } from "@/lib/lumo/types"
 
-import { cn } from "../lib/utils"
-import { PriceDisplay } from "./price-display"
-import { QuantityStepper } from "./quantity-stepper"
+import { cn } from "@/lib/utils"
+import { PriceDisplay } from "@/components/lumo/price-display"
+import { QuantityStepper } from "@/components/lumo/quantity-stepper"
 
 export interface CartLineItemProps extends React.HTMLAttributes<HTMLDivElement> {
   line: CartLine

@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Star } from "lucide-react"
 
-import { cn } from "../lib/utils"
+import { cn } from "@/lib/utils"
 
 export interface RatingStarsProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Rating value, 0 to `max`. */

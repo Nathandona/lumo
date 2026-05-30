@@ -1,8 +1,8 @@
 import * as React from "react"
-import type { Product } from "@lumo-ui/utils"
+import type { Product } from "@/lib/lumo/types"
 
-import { cn } from "../lib/utils"
-import { ProductCard, type ProductCardProps } from "./product-card"
+import { cn } from "@/lib/utils"
+import { ProductCard, type ProductCardProps } from "@/components/lumo/product-card"
 
 export interface ProductGridProps extends React.HTMLAttributes<HTMLDivElement> {
   products: Product[]
