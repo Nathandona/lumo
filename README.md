@@ -1,43 +1,59 @@
-# Lumo UI
-
 <div align="center">
-  <h1>🌟 Lumo UI</h1>
-  <p>Beautiful e-commerce components for modern React apps</p>
-  <p>Built on shadcn/ui foundations with accessibility first</p>
+  <img src="./assets/banner.svg" alt="Lumo UI" width="100%" />
 
-  [![npm version](https://badge.fury.io/js/%40lumo-ui%2Fcore.svg)](https://badge.fury.io/js/%40lumo-ui%2Fcore)
-  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-  [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
+  <h3>Beautiful e-commerce components for modern React apps</h3>
+  <p>A TypeScript-first component library and toolkit built on shadcn/ui foundations, with accessibility first.</p>
+
+  <p>
+    <a href="https://www.npmjs.com/package/@lumo-ui/core"><img alt="npm version" src="https://img.shields.io/npm/v/@lumo-ui/core?style=flat-square&color=2563eb&label=%40lumo-ui%2Fcore" /></a>
+    <a href="https://opensource.org/licenses/MIT"><img alt="License" src="https://img.shields.io/badge/license-MIT-yellow?style=flat-square" /></a>
+    <a href="https://www.typescriptlang.org/"><img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-strict-3178c6?style=flat-square&logo=typescript&logoColor=white" /></a>
+    <a href="https://react.dev/"><img alt="React" src="https://img.shields.io/badge/React-18-61dafb?style=flat-square&logo=react&logoColor=white" /></a>
+    <a href="https://tailwindcss.com/"><img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-3-38bdf8?style=flat-square&logo=tailwindcss&logoColor=white" /></a>
+    <img alt="PRs welcome" src="https://img.shields.io/badge/PRs-welcome-22c55e?style=flat-square" />
+  </p>
 </div>
 
-## ✨ Features
+## Overview
 
-- 🎨 **Beautiful Design** - Built on shadcn/ui with consistent theming
-- ♿ **Accessible First** - WCAG 2.1 AA compliant components
-- 🔧 **TypeScript Native** - Full type safety with comprehensive interfaces
-- ⚡ **Performance** - Optimized components with minimal bundle size
-- 🎯 **E-commerce Focused** - Specialized components for online stores
-- 🌙 **Dark Mode** - Built-in dark mode support
-- 📱 **Responsive** - Mobile-first responsive design
-- 🎭 **Customizable** - Easy theming and variant system
+Lumo UI is a monorepo of building blocks for online stores. It ships accessible React components, e-commerce focused hooks, and pure utility functions for pricing, validation, and cart math. Components extend the shadcn/ui and Radix primitives you already know, so they drop into existing Tailwind projects without a new design system to learn.
 
-## 🚀 Quick Start
+## Features
 
-### Installation
+- **Accessible by default.** Components target WCAG 2.1 AA with proper ARIA roles, keyboard navigation, and focus management.
+- **TypeScript native.** Strict types throughout, no implicit `any`, full prop interfaces exported.
+- **Built on shadcn/ui.** Uses Radix primitives and CSS variable theming for drop-in compatibility.
+- **E-commerce focused.** Product cards, cart and wishlist hooks, checkout flow, and pricing utilities.
+- **Tree-shakeable.** Each package builds dual ESM and CJS output via tsup with separate entry points.
+- **Dark mode ready.** Theming driven by HSL CSS variables.
+- **Tested.** Vitest and Testing Library coverage for components.
+
+## Packages
+
+| Package | Description |
+| --- | --- |
+| `@lumo-ui/core` | React components: `ProductCard`, `Card`, and shared class utilities. |
+| `@lumo-ui/hooks` | E-commerce hooks: `useCart`, `useWishlist`, `useProductFilters`, `useProductSort`, `useCheckout`. |
+| `@lumo-ui/utils` | Framework-agnostic helpers for currency, discounts, cart totals, tax, slugs, and validation. |
+
+## Installation
 
 ```bash
-# Install the core package
+# Core components
 pnpm add @lumo-ui/core
 
-# Install required peer dependencies
+# Optional companion packages
+pnpm add @lumo-ui/hooks @lumo-ui/utils
+
+# Peer dependencies
 pnpm add react react-dom tailwindcss
 ```
 
-### Setup
+> Requires React 18 and Tailwind CSS.
 
-1. **Configure Tailwind CSS**
+## Setup
 
-Make sure you have Tailwind CSS configured in your project:
+1. Configure Tailwind to scan the package source:
 
 ```js
 // tailwind.config.js
@@ -46,13 +62,10 @@ module.exports = {
     './src/**/*.{js,ts,jsx,tsx}',
     './node_modules/@lumo-ui/core/**/*.{js,ts,jsx,tsx}',
   ],
-  // ... rest of your config
 }
 ```
 
-2. **Import CSS**
-
-Add the component styles to your global CSS:
+2. Import the base layers and optional Lumo styles in your global stylesheet:
 
 ```css
 /* globals.css */
@@ -60,11 +73,10 @@ Add the component styles to your global CSS:
 @tailwind components;
 @tailwind utilities;
 
-/* Lumo UI styles (optional, for additional theming) */
 @import '@lumo-ui/core/styles';
 ```
 
-### Usage
+## Usage
 
 ```tsx
 import { ProductCard } from '@lumo-ui/core'
@@ -78,53 +90,73 @@ function App() {
     image: '/headphones.jpg',
     badge: 'sale',
     rating: 4.5,
-    reviewCount: 128
+    reviewCount: 128,
   }
 
   return (
     <ProductCard
       product={product}
-      onAddToCart={(product) => console.log('Added to cart:', product)}
-      onToggleWishlist={(product) => console.log('Wishlist toggle:', product)}
-      onQuickView={(product) => console.log('Quick view:', product)}
+      onAddToCart={(p) => console.log('Added to cart:', p)}
+      onToggleWishlist={(p) => console.log('Wishlist toggle:', p)}
+      onQuickView={(p) => console.log('Quick view:', p)}
     />
   )
 }
 ```
 
-## 📦 Components
+### Hooks
 
-### 🛍️ Product Card
+```tsx
+import { useCart, useWishlist } from '@lumo-ui/hooks'
 
-A responsive product card with variants, badges, and quick actions.
+function Storefront() {
+  const { items, addItem, removeItem, total } = useCart()
+  const { isInWishlist, toggle } = useWishlist()
+  // ...
+}
+```
+
+### Utilities
+
+```ts
+import { formatCurrency, calculateDiscount, validateEmail } from '@lumo-ui/utils'
+
+formatCurrency(199.99)            // "$199.99"
+calculateDiscount(299.99, 199.99) // percentage saved
+validateEmail('hi@lumo-ui.com')   // true
+```
+
+## Components
+
+### ProductCard
+
+A responsive product card with variants, badges, ratings, and quick actions.
 
 ```tsx
 <ProductCard
   product={{
-    id: "1",
-    name: "Product Name",
+    id: '1',
+    name: 'Product Name',
     price: 99.99,
-    image: "/product.jpg",
-    badge: "sale", // optional: 'sale' | 'new' | 'limited'
-    originalPrice: 149.99, // optional
-    rating: 4.5, // optional
-    reviewCount: 25 // optional
+    image: '/product.jpg',
+    badge: 'sale',          // 'sale' | 'new' | 'limited'
+    originalPrice: 149.99,
+    rating: 4.5,
+    reviewCount: 25,
   }}
-  variant="default" // optional: 'default' | 'compact' | 'featured'
-  onAddToCart={(product) => handleAddToCart(product)}
-  onToggleWishlist={(product) => handleWishlist(product)}
-  onQuickView={(product) => handleQuickView(product)}
-  isInWishlist={false} // optional
-  showQuickActions={true} // optional
-  currency="$" // optional
+  variant="default"         // 'default' | 'compact' | 'featured'
+  onAddToCart={handleAddToCart}
+  onToggleWishlist={handleWishlist}
+  onQuickView={handleQuickView}
+  isInWishlist={false}
+  showQuickActions={true}
+  currency="$"
 />
 ```
 
-### Props
+#### Types
 
-#### Product Interface
-
-```tsx
+```ts
 interface Product {
   id: string
   name: string
@@ -136,11 +168,7 @@ interface Product {
   reviewCount?: number
   description?: string
 }
-```
 
-#### ProductCard Props
-
-```tsx
 interface ProductCardProps {
   product: Product
   variant?: 'default' | 'compact' | 'featured'
@@ -154,9 +182,9 @@ interface ProductCardProps {
 }
 ```
 
-## 🎨 Theming
+## Theming
 
-Lumo UI uses CSS variables for theming, compatible with shadcn/ui:
+Lumo UI reads HSL CSS variables, compatible with shadcn/ui tokens:
 
 ```css
 :root {
@@ -179,103 +207,96 @@ Lumo UI uses CSS variables for theming, compatible with shadcn/ui:
 }
 ```
 
-## ♿ Accessibility
+## Accessibility
 
-All Lumo UI components are built with accessibility in mind:
+- WCAG 2.1 AA as the baseline
+- ARIA labels and roles on interactive elements
+- Full keyboard navigation
+- Screen reader friendly markup
+- Managed focus states
+- Semantic HTML structure
 
-- ✅ WCAG 2.1 AA compliant
-- ✅ Proper ARIA labels and roles
-- ✅ Keyboard navigation support
-- ✅ Screen reader compatibility
-- ✅ Focus management
-- ✅ Semantic HTML structure
-
-## 🛠️ Development
-
-### Local Development
-
-```bash
-# Clone the repository
-git clone https://github.com/your-username/lumo-ui.git
-cd lumo-ui
-
-# Install dependencies
-pnpm install
-
-# Start development servers
-pnpm dev
-
-# Build all packages
-pnpm build
-
-# Run tests
-pnpm test
-
-# Lint code
-pnpm lint
-```
-
-### Project Structure
+## Project structure
 
 ```
-lumo-ui/
+lumo/
 ├── packages/
-│   ├── core/              # Core components
-│   ├── hooks/             # Shared React hooks
-│   └── utils/             # Utility functions
+│   ├── core/      # React components
+│   ├── hooks/     # E-commerce React hooks
+│   └── utils/     # Framework-agnostic utilities
 ├── apps/
-│   ├── www/               # Marketing website
-│   ├── docs/              # Documentation site
-│   └── storybook/         # Component playground
-├── examples/
-│   └── nextjs-storefront/ # Full implementation example
+│   ├── www/       # Marketing and docs site (Next.js)
+│   └── storybook/ # Component playground
 └── README.md
 ```
 
-### Adding New Components
+## Development
 
-1. Create component in `packages/core/src/components/`
-2. Export from `packages/core/src/index.ts`
-3. Add comprehensive TypeScript types
-4. Include accessibility features
-5. Add Storybook stories
-6. Write tests
-7. Update documentation
+This is a pnpm and Turborepo monorepo. Node 20 or newer and pnpm 9 or newer are required.
 
-## 🤝 Contributing
+```bash
+# Clone
+git clone https://github.com/Nathandona/lumo.git
+cd lumo
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+# Install
+pnpm install
 
-### Development Guidelines
+# Run all dev servers
+pnpm dev
 
-- Follow strict TypeScript rules (no `any` types)
-- Ensure WCAG 2.1 AA compliance
-- Write comprehensive tests
-- Use semantic HTML
-- Follow the established code style
-- Add proper documentation
+# Build every package
+pnpm build
 
-## 📄 License
+# Test, lint, type-check
+pnpm test
+pnpm lint
+pnpm type-check
 
-MIT © [Lumo UI Team](LICENSE)
+# Storybook
+pnpm storybook
+```
 
-## 🙏 Acknowledgments
+### Available scripts
 
-- [shadcn/ui](https://ui.shadcn.com/) - Beautiful UI components
-- [Radix UI](https://www.radix-ui.com/) - Low-level UI primitives
-- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
-- [Lucide React](https://lucide.dev/) - Beautiful icons
+| Script | Action |
+| --- | --- |
+| `pnpm dev` | Run all package and app dev servers via Turbo. |
+| `pnpm build` | Build all packages and apps. |
+| `pnpm test` | Run the Vitest suites. |
+| `pnpm lint` | Lint with ESLint. |
+| `pnpm type-check` | Type-check with the TypeScript compiler. |
+| `pnpm storybook` | Launch the Storybook playground. |
+| `pnpm changeset` | Create a changeset for versioning. |
+| `pnpm release` | Build packages and publish via Changesets. |
 
-## 📞 Support
+### Adding a component
 
-- 📖 [Documentation](https://lumo-ui.com/docs)
-- 🐛 [Issues](https://github.com/your-username/lumo-ui/issues)
-- 💬 [Discussions](https://github.com/your-username/lumo-ui/discussions)
-- 📧 [Email](mailto:support@lumo-ui.com)
+1. Create the component in `packages/core/src/components/`.
+2. Export it from `packages/core/src/index.ts`.
+3. Add full TypeScript types.
+4. Include accessibility features.
+5. Add a Storybook story.
+6. Write tests.
+7. Update the documentation.
 
----
+## Contributing
 
-<div align="center">
-  <p>Built with ❤️ by the Lumo UI team</p>
-  <p>Star us on <a href="https://github.com/your-username/lumo-ui">GitHub</a>!</p>
-</div>
+Contributions are welcome. Please follow the existing code style and the guidelines below.
+
+- Strict TypeScript, no `any`
+- WCAG 2.1 AA compliance
+- Tests for new behavior
+- Semantic HTML
+- Documentation for public APIs
+
+## License
+
+MIT. See [LICENSE](LICENSE).
+
+## Acknowledgments
+
+- [shadcn/ui](https://ui.shadcn.com/) for the component foundations
+- [Radix UI](https://www.radix-ui.com/) for accessible primitives
+- [Tailwind CSS](https://tailwindcss.com/) for styling
+- [Lucide](https://lucide.dev/) for icons
