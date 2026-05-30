@@ -11,7 +11,7 @@ const componentData = {
   "product-card": {
     name: "Product Card",
     description: "A responsive product card component with variants, badges, and quick actions. Perfect for e-commerce applications.",
-    importCode: `import { ProductCard } from "@lumo-ui/core"`,
+    importCode: `import { ProductCard } from "@/components/lumo/product-card"`,
     usageCode: `<ProductCard
   product={{
     id: "1",
@@ -47,7 +47,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       <Header />
 
       <main className="container mx-auto px-4 py-12">
@@ -123,15 +123,15 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
           <p className="text-muted-foreground mb-6">
             Install Lumo UI and start building beautiful e-commerce experiences.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="hover-lift">
-              Get Started
-              <GithubIcon className="ml-2 h-4 w-4" />
+          <div className="flex flex-col justify-center gap-4 sm:flex-row">
+            <Button size="lg" className="rounded-full" asChild>
+              <a href="https://github.com/Nathandona/lumo" target="_blank" rel="noopener noreferrer" className="gap-2">
+                <GithubIcon className="h-4 w-4" />
+                View on GitHub
+              </a>
             </Button>
-            <Button variant="outline" size="lg" asChild>
-              <Link href="/docs">
-                View Documentation
-              </Link>
+            <Button variant="outline" size="lg" className="rounded-full" asChild>
+              <Link href="/docs">View documentation</Link>
             </Button>
           </div>
         </div>

@@ -1,60 +1,48 @@
 @import "tailwindcss";
 @config "../tailwind.config.ts";
 
+/*
+  Lumo "Honey" theme — warm, luminous, light-only. Lumo = Latin "lux" (light).
+  Semantic HSL tokens below are consumed by both this site and the
+  @lumo-ui/core components (bg-background, bg-primary, bg-card, border, ring...).
+*/
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 45.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
+    --background: 48 100% 98%;        /* cream #FFFDF5 */
+    --foreground: 44 29% 18%;         /* warm ink #3A3320 */
+    --card: 48 100% 99%;
+    --card-foreground: 44 29% 18%;
+    --popover: 48 100% 99%;
+    --popover-foreground: 44 29% 18%;
+    --primary: 39 100% 56%;           /* honey-2 #FFB020 */
+    --primary-foreground: 44 42% 14%; /* dark ink on honey */
+    --secondary: 45 70% 92%;
+    --secondary-foreground: 44 35% 20%;
+    --muted: 45 52% 94%;
+    --muted-foreground: 46 14% 47%;   /* ink-soft #8A8268 */
+    --accent: 45 85% 90%;             /* amberglow */
+    --accent-foreground: 44 35% 20%;
     --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
-    --radius: 0.75rem;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-  }
+    --destructive-foreground: 0 0% 100%;
+    --border: 43 42% 85%;
+    --input: 43 42% 85%;
+    --ring: 39 100% 56%;
+    --radius: 1rem;
+    --chart-1: 39 100% 56%;
+    --chart-2: 43 100% 72%;
+    --chart-3: 28 90% 58%;
+    --chart-4: 48 90% 64%;
+    --chart-5: 16 80% 60%;
 
-  .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 85.7% 97.3%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    /* raw honey ramp for gradients / glow */
+    --cream: #FFFDF5;
+    --honey: #FFC94D;
+    --honey-2: #FFB020;
+    --amberglow: #FFE49C;
+    --ink: #3A3320;
+    --ink-soft: #8A8268;
+    --glass: rgba(255, 255, 255, 0.66);
+    --stroke: rgba(180, 150, 70, 0.22);
   }
 }
 
@@ -62,41 +50,109 @@
   * {
     @apply border-border;
   }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply bg-background text-foreground;
-    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: var(--font-sans), "Hanken Grotesk", system-ui, sans-serif;
+    position: relative;
+    min-height: 100dvh;
+  }
+  /* warm honey gradient mesh — fixed behind content */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: -20%;
+    z-index: -2;
+    pointer-events: none;
+    background:
+      radial-gradient(38% 46% at 18% 14%, rgba(255, 201, 77, 0.50), transparent 60%),
+      radial-gradient(42% 42% at 86% 10%, rgba(255, 228, 156, 0.62), transparent 60%),
+      radial-gradient(48% 50% at 72% 88%, rgba(255, 176, 32, 0.26), transparent 60%),
+      radial-gradient(40% 40% at 8% 82%, rgba(255, 228, 156, 0.40), transparent 60%);
+    animation: mesh-drift 18s ease-in-out infinite alternate;
+  }
+  /* subtle grain — fixed, never on scrolling containers */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  h1, h2, h3 {
+    font-family: var(--font-display), "Bricolage Grotesque", sans-serif;
   }
 }
 
 @layer components {
-  .gradient-border {
-    background: linear-gradient(135deg, hsl(var(--primary) / 0.3), hsl(var(--accent) / 0.3));
-    padding: 1px;
-  }
-
   .glass {
-    background: hsl(var(--card) / 0.8);
-    backdrop-filter: blur(10px);
-    border: 1px solid hsl(var(--border) / 0.5);
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 24px 60px -30px rgba(180, 130, 30, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.8);
   }
-
-  .text-gradient {
-    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .text-honey {
+    color: hsl(var(--primary));
   }
-
+  .mesh-card {
+    background: radial-gradient(120% 100% at 30% 20%, #FFE7B0, var(--honey) 70%, var(--honey-2));
+  }
   .hover-lift {
-    @apply transition-transform duration-200 hover:-translate-y-1;
+    transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-3px);
   }
 
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
+  /* copy-to-clipboard icon morph (Copy <-> Check) */
+  .copy-icon {
+    position: absolute;
+    transition:
+      opacity 150ms cubic-bezier(0.23, 1, 0.32, 1),
+      transform 150ms cubic-bezier(0.23, 1, 0.32, 1),
+      filter 150ms ease;
   }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
+  .copy-icon--shown {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+  .copy-icon--hidden {
+    opacity: 0;
+    transform: scale(0.6);
+    filter: blur(2px);
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .copy-icon {
+    transition: opacity 120ms ease;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
+/* entrance + ambient motion (MOTION_INTENSITY 5) */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: rise 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+  .d1 { animation-delay: 0.05s; }
+  .d2 { animation-delay: 0.16s; }
+  .d3 { animation-delay: 0.28s; }
+  .d4 { animation-delay: 0.4s; }
+  .d5 { animation-delay: 0.52s; }
+  .float { animation: bob 6s ease-in-out infinite; }
+  .float-slow { animation: bob 8s ease-in-out infinite 0.3s; }
+}
+
+@keyframes rise { to { opacity: 1; transform: none; } }
+@keyframes bob { 50% { transform: translateY(-16px); } }
+@keyframes mesh-drift { to { transform: translate3d(0, -18px, 0) scale(1.04); } }

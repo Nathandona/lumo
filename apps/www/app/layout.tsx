@@ -1,35 +1,45 @@
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Bricolage_Grotesque, Hanken_Grotesk, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
 
-const inter = Inter({ subsets: ["latin"] })
+const display = Bricolage_Grotesque({
+  subsets: ["latin"],
+  weight: ["600", "700", "800"],
+  variable: "--font-display",
+})
+
+const sans = Hanken_Grotesk({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-sans",
+})
+
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-mono",
+})
 
 export const metadata: Metadata = {
-  title: "Lumo UI - Professional E-commerce Components",
-  description: "Beautiful, accessible e-commerce components for modern React apps. Built with shadcn/ui, TypeScript-first, and dark mode by default.",
-  keywords: ["React", "Components", "E-commerce", "UI", "shadcn/ui", "TypeScript", "Dark Mode", "Professional"],
-  authors: [{ name: "Lumo UI Team" }],
+  metadataBase: new URL("https://lumo-www.vercel.app"),
+  icons: { icon: "/icon.svg" },
+  title: "Lumo UI - Luminous e-commerce components",
+  description:
+    "A warm, accessible, headless registry of e-commerce components for React. Copy them into your project with the shadcn CLI and own every line.",
+  keywords: ["React", "Components", "E-commerce", "shadcn", "Tailwind", "TypeScript", "Headless", "Accessible"],
+  authors: [{ name: "Lumo UI" }],
   openGraph: {
-    title: "Lumo UI - Professional E-commerce Components",
-    description: "Beautiful, accessible e-commerce components for modern React apps",
+    title: "Lumo UI - Luminous e-commerce components",
+    description: "A warm, accessible, headless registry of e-commerce components for React.",
     type: "website",
-    url: "https://lumo-ui.com",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Lumo UI Component Library",
-      },
-    ],
+    url: "https://lumo-www.vercel.app",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Lumo UI - Professional E-commerce Components",
-    description: "Beautiful, accessible e-commerce components for modern React apps",
-    images: ["/og-image.png"],
+    title: "Lumo UI - Luminous e-commerce components",
+    description: "A warm, accessible, headless registry of e-commerce components for React.",
   },
 }
 
@@ -39,14 +49,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
+    <html lang="en" suppressHydrationWarning className={`${display.variable} ${sans.variable} ${mono.variable}`}>
+      <body>
+        <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light" enableSystem={false}>
           {children}
         </ThemeProvider>
         <Analytics />
