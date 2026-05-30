@@ -5,6 +5,7 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { RegistryPreview } from "@/components/registry-previews"
 
 interface ComponentProps {
   component: {
@@ -21,12 +22,8 @@ export function ComponentCard({ component }: ComponentProps) {
   return (
     <Card className="group hover-lift glass rounded-2xl">
       <CardHeader className="pb-3">
-        <div className="mb-4 aspect-video overflow-hidden rounded-xl border">
-          <div className="mesh-card flex h-full w-full items-center justify-center">
-            <span className="font-display text-lg font-bold text-[hsl(var(--primary-foreground))]/70">
-              {component.name}
-            </span>
-          </div>
+        <div className="mb-4 flex min-h-[220px] items-center justify-center overflow-hidden rounded-xl border bg-[var(--glass)] p-5">
+          <RegistryPreview id={component.id} />
         </div>
         <div className="space-y-2">
           <div className="flex items-center justify-between gap-2">
