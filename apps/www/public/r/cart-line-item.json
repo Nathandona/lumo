@@ -7,9 +7,9 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "https://lumo.dev/r/lib.json",
-    "https://lumo.dev/r/price-display.json",
-    "https://lumo.dev/r/quantity-stepper.json"
+    "https://lumo-www.vercel.app/r/lib.json",
+    "https://lumo-www.vercel.app/r/price-display.json",
+    "https://lumo-www.vercel.app/r/quantity-stepper.json"
   ],
   "files": [
     {

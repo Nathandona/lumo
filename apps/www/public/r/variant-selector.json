@@ -4,7 +4,7 @@
   "title": "Variant Selector",
   "description": "Option picker that detects which variant combinations are available.",
   "registryDependencies": [
-    "https://lumo.dev/r/lib.json"
+    "https://lumo-www.vercel.app/r/lib.json"
   ],
   "files": [
     {

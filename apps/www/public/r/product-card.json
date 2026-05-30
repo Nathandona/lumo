@@ -8,9 +8,9 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "https://lumo.dev/r/lib.json",
-    "https://lumo.dev/r/price-display.json",
-    "https://lumo.dev/r/rating-stars.json"
+    "https://lumo-www.vercel.app/r/lib.json",
+    "https://lumo-www.vercel.app/r/price-display.json",
+    "https://lumo-www.vercel.app/r/rating-stars.json"
   ],
   "files": [
     {

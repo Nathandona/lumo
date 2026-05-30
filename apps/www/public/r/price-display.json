@@ -7,7 +7,7 @@
     "class-variance-authority"
   ],
   "registryDependencies": [
-    "https://lumo.dev/r/lib.json"
+    "https://lumo-www.vercel.app/r/lib.json"
   ],
   "files": [
     {

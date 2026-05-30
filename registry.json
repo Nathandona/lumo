@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "lumo",
-  "homepage": "https://lumo.dev",
+  "homepage": "https://lumo-www.vercel.app",
   "items": [
     {
       "name": "lib",
@@ -27,7 +27,7 @@
       "title": "Price Display",
       "description": "Renders a Money value with optional compare-at price and discount badge.",
       "dependencies": ["class-variance-authority"],
-      "registryDependencies": ["https://lumo.dev/r/lib.json"],
+      "registryDependencies": ["https://lumo-www.vercel.app/r/lib.json"],
       "files": [
         {
           "path": "packages/core/src/components/lumo/price-display.tsx",
@@ -69,7 +69,7 @@
       "type": "registry:ui",
       "title": "Variant Selector",
       "description": "Option picker that detects which variant combinations are available.",
-      "registryDependencies": ["https://lumo.dev/r/lib.json"],
+      "registryDependencies": ["https://lumo-www.vercel.app/r/lib.json"],
       "files": [
         {
           "path": "packages/core/src/components/lumo/variant-selector.tsx",
@@ -85,9 +85,9 @@
       "description": "Responsive product card with badges, rating, price, and quick actions.",
       "dependencies": ["class-variance-authority", "lucide-react"],
       "registryDependencies": [
-        "https://lumo.dev/r/lib.json",
-        "https://lumo.dev/r/price-display.json",
-        "https://lumo.dev/r/rating-stars.json"
+        "https://lumo-www.vercel.app/r/lib.json",
+        "https://lumo-www.vercel.app/r/price-display.json",
+        "https://lumo-www.vercel.app/r/rating-stars.json"
       ],
       "files": [
         {
@@ -103,8 +103,8 @@
       "title": "Product Grid",
       "description": "Responsive product grid with loading skeletons and an empty state.",
       "registryDependencies": [
-        "https://lumo.dev/r/lib.json",
-        "https://lumo.dev/r/product-card.json"
+        "https://lumo-www.vercel.app/r/lib.json",
+        "https://lumo-www.vercel.app/r/product-card.json"
       ],
       "files": [
         {
@@ -121,9 +121,9 @@
       "description": "A single cart line with image, variant, quantity stepper, and line total.",
       "dependencies": ["lucide-react"],
       "registryDependencies": [
-        "https://lumo.dev/r/lib.json",
-        "https://lumo.dev/r/price-display.json",
-        "https://lumo.dev/r/quantity-stepper.json"
+        "https://lumo-www.vercel.app/r/lib.json",
+        "https://lumo-www.vercel.app/r/price-display.json",
+        "https://lumo-www.vercel.app/r/quantity-stepper.json"
       ],
       "files": [
         {
@@ -138,7 +138,7 @@
       "type": "registry:ui",
       "title": "Cart Summary",
       "description": "Subtotal, optional total, taxes-and-shipping note, and a checkout button.",
-      "registryDependencies": ["https://lumo.dev/r/lib.json"],
+      "registryDependencies": ["https://lumo-www.vercel.app/r/lib.json"],
       "files": [
         {
           "path": "packages/core/src/components/lumo/cart-summary.tsx",
@@ -154,9 +154,9 @@
       "description": "Accessible slide-over cart built on Radix Dialog, with line items and summary.",
       "dependencies": ["@radix-ui/react-dialog", "lucide-react"],
       "registryDependencies": [
-        "https://lumo.dev/r/lib.json",
-        "https://lumo.dev/r/cart-line-item.json",
-        "https://lumo.dev/r/cart-summary.json"
+        "https://lumo-www.vercel.app/r/lib.json",
+        "https://lumo-www.vercel.app/r/cart-line-item.json",
+        "https://lumo-www.vercel.app/r/cart-summary.json"
       ],
       "files": [
         {
