@@ -152,7 +152,7 @@
       "type": "registry:ui",
       "title": "Cart Drawer",
       "description": "Accessible slide-over cart built on Radix Dialog, with line items and summary.",
-      "dependencies": ["@radix-ui/react-dialog", "lucide-react"],
+      "dependencies": ["@radix-ui/react-dialog", "lucide-react", "tw-animate-css"],
       "registryDependencies": [
         "https://lumo-www.vercel.app/r/lib.json",
         "https://lumo-www.vercel.app/r/cart-line-item.json",

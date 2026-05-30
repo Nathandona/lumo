@@ -39,7 +39,7 @@ const QuantityStepper = React.forwardRef<HTMLDivElement, QuantityStepperProps>(
     }
 
     const button =
-      "flex items-center justify-center text-foreground transition-colors hover:bg-accent disabled:pointer-events-none disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      "flex items-center justify-center text-foreground transition-[color,background-color,transform] hover:bg-accent active:scale-90 disabled:pointer-events-none disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
     const dimensions = size === "sm" ? "h-7 w-7" : "h-9 w-9"
 
     return (

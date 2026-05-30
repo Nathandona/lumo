@@ -121,7 +121,7 @@ const ProductCard = React.forwardRef<HTMLDivElement, ProductCardProps>(
                 <button
                   type="button"
                   onClick={() => onToggleWishlist(product)}
-                  className="rounded-full bg-background/90 p-2 backdrop-blur-sm transition-colors hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="rounded-full bg-background/90 p-2 backdrop-blur-sm transition-[color,background-color,transform] hover:bg-background active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   aria-label={isInWishlist ? "Remove from wishlist" : "Add to wishlist"}
                   aria-pressed={isInWishlist}
                 >
@@ -137,7 +137,7 @@ const ProductCard = React.forwardRef<HTMLDivElement, ProductCardProps>(
                 <button
                   type="button"
                   onClick={() => onQuickView(product)}
-                  className="rounded-full bg-background/90 p-2 backdrop-blur-sm transition-colors hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="rounded-full bg-background/90 p-2 backdrop-blur-sm transition-[color,background-color,transform] hover:bg-background active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   aria-label={`Quick view ${product.title}`}
                 >
                   <Eye className="h-4 w-4 text-foreground" />
@@ -172,7 +172,7 @@ const ProductCard = React.forwardRef<HTMLDivElement, ProductCardProps>(
                 type="button"
                 onClick={() => onAddToCart(product, variant)}
                 disabled={soldOut}
-                className="rounded-md bg-primary p-2 text-primary-foreground transition-colors hover:bg-primary/90 disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="rounded-md bg-primary p-2 text-primary-foreground transition-[color,background-color,transform] hover:bg-primary/90 active:scale-90 disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 aria-label={`Add ${product.title} to cart`}
               >
                 <ShoppingCart className="h-4 w-4" />

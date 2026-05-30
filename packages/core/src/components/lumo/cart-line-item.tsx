@@ -48,7 +48,7 @@ const CartLineItem = React.forwardRef<HTMLDivElement, CartLineItemProps>(
               <button
                 type="button"
                 onClick={() => onRemove(line.id)}
-                className="shrink-0 rounded-md p-1 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="shrink-0 rounded-md p-1 text-muted-foreground transition-[color,background-color,transform] hover:bg-accent hover:text-foreground active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 aria-label={`Remove ${line.product.title} from cart`}
               >
                 <X className="h-4 w-4" />
