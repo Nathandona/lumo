@@ -1,7 +1,7 @@
 import * as React from "react"
-import type { ProductOption, SelectedOption, Variant } from "@lumo-ui/utils"
+import type { ProductOption, SelectedOption, Variant } from "@/lib/lumo/types"
 
-import { cn } from "../lib/utils"
+import { cn } from "@/lib/utils"
 
 export interface VariantSelectorProps extends React.HTMLAttributes<HTMLDivElement> {
   options: ProductOption[]

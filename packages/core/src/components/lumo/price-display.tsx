@@ -1,9 +1,9 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
-import type { Money } from "@lumo-ui/utils"
-import { formatMoney, discountPercent } from "@lumo-ui/utils"
+import type { Money } from "@/lib/lumo/types"
+import { formatMoney, discountPercent } from "@/lib/lumo/money"
 
-import { cn } from "../lib/utils"
+import { cn } from "@/lib/utils"
 
 const priceVariants = cva("font-semibold text-foreground tabular-nums", {
   variants: {

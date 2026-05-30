@@ -1,11 +1,11 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { ShoppingCart, Heart, Eye } from "lucide-react"
-import type { Product, Variant } from "@lumo-ui/utils"
+import type { Product, Variant } from "@/lib/lumo/types"
 
-import { cn } from "../lib/utils"
-import { PriceDisplay } from "./price-display"
-import { RatingStars } from "./rating-stars"
+import { cn } from "@/lib/utils"
+import { PriceDisplay } from "@/components/lumo/price-display"
+import { RatingStars } from "@/components/lumo/rating-stars"
 
 const productCardVariants = cva(
   "group relative flex flex-col overflow-hidden rounded-lg border bg-card text-card-foreground transition-all duration-200 hover:shadow-lg",

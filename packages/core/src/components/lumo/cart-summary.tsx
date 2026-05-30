@@ -1,8 +1,8 @@
 import * as React from "react"
-import type { Money } from "@lumo-ui/utils"
-import { formatMoney } from "@lumo-ui/utils"
+import type { Money } from "@/lib/lumo/types"
+import { formatMoney } from "@/lib/lumo/money"
 
-import { cn } from "../lib/utils"
+import { cn } from "@/lib/utils"
 
 export interface CartSummaryProps extends React.HTMLAttributes<HTMLDivElement> {
   subtotal: Money

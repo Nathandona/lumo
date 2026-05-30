@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "cart-drawer",
+  "title": "Cart Drawer",
+  "description": "Accessible slide-over cart built on Radix Dialog, with line items and summary.",
+  "dependencies": [
+    "@radix-ui/react-dialog",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "https://lumo.dev/r/lib.json",
+    "https://lumo.dev/r/cart-line-item.json",
+    "https://lumo.dev/r/cart-summary.json"
+  ],
+  "files": [
+    {
+      "path": "packages/core/src/components/lumo/cart-drawer.tsx",
+      "content": "\"use client\"\r\n\r\nimport * as React from \"react\"\r\nimport * as DialogPrimitive from \"@radix-ui/react-dialog\"\r\nimport { ShoppingBag, X } from \"lucide-react\"\r\nimport type { CartLine, Money } from \"@/lib/lumo/types\"\r\n\r\nimport { cn } from \"@/lib/utils\"\r\nimport { CartLineItem } from \"@/components/lumo/cart-line-item\"\r\nimport { CartSummary } from \"@/components/lumo/cart-summary\"\r\n\r\nexport interface CartDrawerProps {\r\n  open?: boolean\r\n  onOpenChange?: (open: boolean) => void\r\n  lines: CartLine[]\r\n  subtotal: Money\r\n  total?: Money\r\n  onQuantityChange?: (lineId: string, quantity: number) => void\r\n  onRemove?: (lineId: string) => void\r\n  onCheckout?: () => void\r\n  locale?: string\r\n  title?: string\r\n  /** Element that opens the drawer, rendered as the dialog trigger. */\r\n  trigger?: React.ReactNode\r\n  emptyState?: React.ReactNode\r\n  className?: string\r\n}\r\n\r\nfunction CartDrawer({\r\n  open,\r\n  onOpenChange,\r\n  lines,\r\n  subtotal,\r\n  total,\r\n  onQuantityChange,\r\n  onRemove,\r\n  onCheckout,\r\n  locale,\r\n  title = \"Your cart\",\r\n  trigger,\r\n  emptyState,\r\n  className,\r\n}: CartDrawerProps) {\r\n  return (\r\n    <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>\r\n      {trigger && <DialogPrimitive.Trigger asChild>{trigger}</DialogPrimitive.Trigger>}\r\n      <DialogPrimitive.Portal>\r\n        <DialogPrimitive.Overlay className=\"fixed inset-0 z-50 bg-black/50 backdrop-blur-sm\" />\r\n        <DialogPrimitive.Content\r\n          className={cn(\r\n            \"fixed inset-y-0 right-0 z-50 flex h-full w-full max-w-md flex-col border-l bg-background shadow-xl focus:outline-none\",\r\n            className\r\n          )}\r\n        >\r\n          <div className=\"flex items-center justify-between border-b p-4\">\r\n            <DialogPrimitive.Title className=\"flex items-center gap-2 text-lg font-semibold\">\r\n              <ShoppingBag className=\"h-5 w-5\" />\r\n              {title}\r\n            </DialogPrimitive.Title>\r\n            <DialogPrimitive.Close\r\n              className=\"rounded-md p-1 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\"\r\n              aria-label=\"Close cart\"\r\n            >\r\n              <X className=\"h-5 w-5\" />\r\n            </DialogPrimitive.Close>\r\n          </div>\r\n\r\n          <DialogPrimitive.Description className=\"sr-only\">\r\n            Items in your shopping cart\r\n          </DialogPrimitive.Description>\r\n\r\n          {lines.length === 0 ? (\r\n            <div className=\"flex flex-1 flex-col items-center justify-center gap-3 p-6 text-center\">\r\n              {emptyState ?? (\r\n                <>\r\n                  <ShoppingBag className=\"h-10 w-10 text-muted-foreground/40\" />\r\n                  <p className=\"text-sm text-muted-foreground\">Your cart is empty.</p>\r\n                </>\r\n              )}\r\n            </div>\r\n          ) : (\r\n            <div className=\"flex-1 divide-y overflow-y-auto px-4\">\r\n              {lines.map((line) => (\r\n                <CartLineItem\r\n                  key={line.id}\r\n                  line={line}\r\n                  onQuantityChange={onQuantityChange}\r\n                  onRemove={onRemove}\r\n                  locale={locale}\r\n                />\r\n              ))}\r\n            </div>\r\n          )}\r\n\r\n          {lines.length > 0 && (\r\n            <div className=\"border-t p-4\">\r\n              <CartSummary\r\n                subtotal={subtotal}\r\n                total={total}\r\n                locale={locale}\r\n                onCheckout={onCheckout}\r\n              />\r\n            </div>\r\n          )}\r\n        </DialogPrimitive.Content>\r\n      </DialogPrimitive.Portal>\r\n    </DialogPrimitive.Root>\r\n  )\r\n}\r\nCartDrawer.displayName = \"CartDrawer\"\r\n\r\nexport { CartDrawer }\r\n",
+      "type": "registry:ui",
+      "target": "components/lumo/cart-drawer.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

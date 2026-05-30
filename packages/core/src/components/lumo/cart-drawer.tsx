@@ -3,11 +3,11 @@
 import * as React from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { ShoppingBag, X } from "lucide-react"
-import type { CartLine, Money } from "@lumo-ui/utils"
+import type { CartLine, Money } from "@/lib/lumo/types"
 
-import { cn } from "../lib/utils"
-import { CartLineItem } from "./cart-line-item"
-import { CartSummary } from "./cart-summary"
+import { cn } from "@/lib/utils"
+import { CartLineItem } from "@/components/lumo/cart-line-item"
+import { CartSummary } from "@/components/lumo/cart-summary"
 
 export interface CartDrawerProps {
   open?: boolean

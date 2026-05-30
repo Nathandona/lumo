@@ -20,6 +20,151 @@
           "target": "lib/lumo/money.ts"
         }
       ]
+    },
+    {
+      "name": "price-display",
+      "type": "registry:ui",
+      "title": "Price Display",
+      "description": "Renders a Money value with optional compare-at price and discount badge.",
+      "dependencies": ["class-variance-authority"],
+      "registryDependencies": ["https://lumo.dev/r/lib.json"],
+      "files": [
+        {
+          "path": "packages/core/src/components/lumo/price-display.tsx",
+          "type": "registry:ui",
+          "target": "components/lumo/price-display.tsx"
+        }
+      ]
+    },
+    {
+      "name": "rating-stars",
+      "type": "registry:ui",
+      "title": "Rating Stars",
+      "description": "Accessible star rating with an optional review count.",
+      "dependencies": ["lucide-react"],
+      "files": [
+        {
+          "path": "packages/core/src/components/lumo/rating-stars.tsx",
+          "type": "registry:ui",
+          "target": "components/lumo/rating-stars.tsx"
+        }
+      ]
+    },
+    {
+      "name": "quantity-stepper",
+      "type": "registry:ui",
+      "title": "Quantity Stepper",
+      "description": "Accessible increment and decrement control with min and max clamping.",
+      "dependencies": ["lucide-react"],
+      "files": [
+        {
+          "path": "packages/core/src/components/lumo/quantity-stepper.tsx",
+          "type": "registry:ui",
+          "target": "components/lumo/quantity-stepper.tsx"
+        }
+      ]
+    },
+    {
+      "name": "variant-selector",
+      "type": "registry:ui",
+      "title": "Variant Selector",
+      "description": "Option picker that detects which variant combinations are available.",
+      "registryDependencies": ["https://lumo.dev/r/lib.json"],
+      "files": [
+        {
+          "path": "packages/core/src/components/lumo/variant-selector.tsx",
+          "type": "registry:ui",
+          "target": "components/lumo/variant-selector.tsx"
+        }
+      ]
+    },
+    {
+      "name": "product-card",
+      "type": "registry:ui",
+      "title": "Product Card",
+      "description": "Responsive product card with badges, rating, price, and quick actions.",
+      "dependencies": ["class-variance-authority", "lucide-react"],
+      "registryDependencies": [
+        "https://lumo.dev/r/lib.json",
+        "https://lumo.dev/r/price-display.json",
+        "https://lumo.dev/r/rating-stars.json"
+      ],
+      "files": [
+        {
+          "path": "packages/core/src/components/lumo/product-card.tsx",
+          "type": "registry:ui",
+          "target": "components/lumo/product-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "product-grid",
+      "type": "registry:ui",
+      "title": "Product Grid",
+      "description": "Responsive product grid with loading skeletons and an empty state.",
+      "registryDependencies": [
+        "https://lumo.dev/r/lib.json",
+        "https://lumo.dev/r/product-card.json"
+      ],
+      "files": [
+        {
+          "path": "packages/core/src/components/lumo/product-grid.tsx",
+          "type": "registry:ui",
+          "target": "components/lumo/product-grid.tsx"
+        }
+      ]
+    },
+    {
+      "name": "cart-line-item",
+      "type": "registry:ui",
+      "title": "Cart Line Item",
+      "description": "A single cart line with image, variant, quantity stepper, and line total.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": [
+        "https://lumo.dev/r/lib.json",
+        "https://lumo.dev/r/price-display.json",
+        "https://lumo.dev/r/quantity-stepper.json"
+      ],
+      "files": [
+        {
+          "path": "packages/core/src/components/lumo/cart-line-item.tsx",
+          "type": "registry:ui",
+          "target": "components/lumo/cart-line-item.tsx"
+        }
+      ]
+    },
+    {
+      "name": "cart-summary",
+      "type": "registry:ui",
+      "title": "Cart Summary",
+      "description": "Subtotal, optional total, taxes-and-shipping note, and a checkout button.",
+      "registryDependencies": ["https://lumo.dev/r/lib.json"],
+      "files": [
+        {
+          "path": "packages/core/src/components/lumo/cart-summary.tsx",
+          "type": "registry:ui",
+          "target": "components/lumo/cart-summary.tsx"
+        }
+      ]
+    },
+    {
+      "name": "cart-drawer",
+      "type": "registry:ui",
+      "title": "Cart Drawer",
+      "description": "Accessible slide-over cart built on Radix Dialog, with line items and summary.",
+      "dependencies": ["@radix-ui/react-dialog", "lucide-react"],
+      "registryDependencies": [
+        "https://lumo.dev/r/lib.json",
+        "https://lumo.dev/r/cart-line-item.json",
+        "https://lumo.dev/r/cart-summary.json"
+      ],
+      "files": [
+        {
+          "path": "packages/core/src/components/lumo/cart-drawer.tsx",
+          "type": "registry:ui",
+          "target": "components/lumo/cart-drawer.tsx"
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "quantity-stepper",
+  "title": "Quantity Stepper",
+  "description": "Accessible increment and decrement control with min and max clamping.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "packages/core/src/components/lumo/quantity-stepper.tsx",
+      "content": "import * as React from \"react\"\r\nimport { Minus, Plus } from \"lucide-react\"\r\n\r\nimport { cn } from \"@/lib/utils\"\r\n\r\nexport interface QuantityStepperProps\r\n  extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\"> {\r\n  value: number\r\n  onValueChange: (value: number) => void\r\n  min?: number\r\n  max?: number\r\n  disabled?: boolean\r\n  size?: \"sm\" | \"md\"\r\n  /** Accessible label for the control. Defaults to \"Quantity\". */\r\n  label?: string\r\n}\r\n\r\nconst QuantityStepper = React.forwardRef<HTMLDivElement, QuantityStepperProps>(\r\n  (\r\n    {\r\n      className,\r\n      value,\r\n      onValueChange,\r\n      min = 1,\r\n      max,\r\n      disabled = false,\r\n      size = \"md\",\r\n      label = \"Quantity\",\r\n      ...props\r\n    },\r\n    ref\r\n  ) => {\r\n    const canDecrement = !disabled && value > min\r\n    const canIncrement = !disabled && (max === undefined || value < max)\r\n\r\n    const clamp = (next: number) => {\r\n      const lower = Math.max(min, next)\r\n      return max === undefined ? lower : Math.min(max, lower)\r\n    }\r\n\r\n    const button =\r\n      \"flex items-center justify-center text-foreground transition-colors hover:bg-accent disabled:pointer-events-none disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\"\r\n    const dimensions = size === \"sm\" ? \"h-7 w-7\" : \"h-9 w-9\"\r\n\r\n    return (\r\n      <div\r\n        ref={ref}\r\n        className={cn(\r\n          \"inline-flex items-center rounded-md border border-input bg-background\",\r\n          className\r\n        )}\r\n        {...props}\r\n      >\r\n        <button\r\n          type=\"button\"\r\n          className={cn(button, dimensions, \"rounded-l-md\")}\r\n          onClick={() => onValueChange(clamp(value - 1))}\r\n          disabled={!canDecrement}\r\n          aria-label={`Decrease ${label.toLowerCase()}`}\r\n        >\r\n          <Minus className=\"h-3.5 w-3.5\" />\r\n        </button>\r\n        <input\r\n          type=\"text\"\r\n          inputMode=\"numeric\"\r\n          aria-label={label}\r\n          value={value}\r\n          disabled={disabled}\r\n          onChange={(event) => {\r\n            const parsed = parseInt(event.target.value, 10)\r\n            if (!Number.isNaN(parsed)) {\r\n              onValueChange(clamp(parsed))\r\n            }\r\n          }}\r\n          className={cn(\r\n            \"w-10 border-x border-input bg-transparent text-center text-sm tabular-nums focus-visible:outline-none\",\r\n            size === \"sm\" ? \"h-7\" : \"h-9\"\r\n          )}\r\n        />\r\n        <button\r\n          type=\"button\"\r\n          className={cn(button, dimensions, \"rounded-r-md\")}\r\n          onClick={() => onValueChange(clamp(value + 1))}\r\n          disabled={!canIncrement}\r\n          aria-label={`Increase ${label.toLowerCase()}`}\r\n        >\r\n          <Plus className=\"h-3.5 w-3.5\" />\r\n        </button>\r\n      </div>\r\n    )\r\n  }\r\n)\r\nQuantityStepper.displayName = \"QuantityStepper\"\r\n\r\nexport { QuantityStepper }\r\n",
+      "type": "registry:ui",
+      "target": "components/lumo/quantity-stepper.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

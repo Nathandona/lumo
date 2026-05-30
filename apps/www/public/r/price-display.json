@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "price-display",
+  "title": "Price Display",
+  "description": "Renders a Money value with optional compare-at price and discount badge.",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "https://lumo.dev/r/lib.json"
+  ],
+  "files": [
+    {
+      "path": "packages/core/src/components/lumo/price-display.tsx",
+      "content": "import * as React from \"react\"\r\nimport { cva, type VariantProps } from \"class-variance-authority\"\r\nimport type { Money } from \"@/lib/lumo/types\"\r\nimport { formatMoney, discountPercent } from \"@/lib/lumo/money\"\r\n\r\nimport { cn } from \"@/lib/utils\"\r\n\r\nconst priceVariants = cva(\"font-semibold text-foreground tabular-nums\", {\r\n  variants: {\r\n    size: {\r\n      sm: \"text-sm\",\r\n      md: \"text-base\",\r\n      lg: \"text-xl\",\r\n    },\r\n  },\r\n  defaultVariants: {\r\n    size: \"md\",\r\n  },\r\n})\r\n\r\nexport interface PriceDisplayProps\r\n  extends React.HTMLAttributes<HTMLDivElement>,\r\n    VariantProps<typeof priceVariants> {\r\n  price: Money\r\n  /** Original price; when higher than `price`, it renders struck through. */\r\n  compareAtPrice?: Money\r\n  locale?: string\r\n  /** Show the saved percentage as a small badge. Defaults to true. */\r\n  showDiscount?: boolean\r\n}\r\n\r\nconst PriceDisplay = React.forwardRef<HTMLDivElement, PriceDisplayProps>(\r\n  (\r\n    { className, price, compareAtPrice, locale, showDiscount = true, size, ...props },\r\n    ref\r\n  ) => {\r\n    const hasDiscount =\r\n      !!compareAtPrice &&\r\n      compareAtPrice.currency === price.currency &&\r\n      compareAtPrice.amount > price.amount\r\n    const percent = hasDiscount ? discountPercent(compareAtPrice!, price) : 0\r\n\r\n    return (\r\n      <div ref={ref} className={cn(\"flex items-center gap-2\", className)} {...props}>\r\n        <span className={cn(priceVariants({ size }))}>{formatMoney(price, { locale })}</span>\r\n        {hasDiscount && (\r\n          <span className=\"text-sm text-muted-foreground line-through tabular-nums\">\r\n            {formatMoney(compareAtPrice!, { locale })}\r\n          </span>\r\n        )}\r\n        {hasDiscount && showDiscount && percent > 0 && (\r\n          <span className=\"rounded bg-destructive/10 px-1.5 py-0.5 text-xs font-medium text-destructive\">\r\n            -{percent}%\r\n          </span>\r\n        )}\r\n      </div>\r\n    )\r\n  }\r\n)\r\nPriceDisplay.displayName = \"PriceDisplay\"\r\n\r\nexport { PriceDisplay, priceVariants }\r\n",
+      "type": "registry:ui",
+      "target": "components/lumo/price-display.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

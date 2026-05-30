@@ -17,19 +17,19 @@ export type {
 } from '@lumo-ui/utils'
 
 // Primitives
-export * from './components/price-display'
-export * from './components/rating-stars'
-export * from './components/quantity-stepper'
+export * from './components/lumo/price-display'
+export * from './components/lumo/rating-stars'
+export * from './components/lumo/quantity-stepper'
 
 // Product
-export * from './components/product-card'
-export * from './components/product-grid'
-export * from './components/variant-selector'
+export * from './components/lumo/product-card'
+export * from './components/lumo/product-grid'
+export * from './components/lumo/variant-selector'
 
 // Cart
-export * from './components/cart-line-item'
-export * from './components/cart-summary'
-export * from './components/cart-drawer'
+export * from './components/lumo/cart-line-item'
+export * from './components/lumo/cart-summary'
+export * from './components/lumo/cart-drawer'
 
 // Layout
 export * from './components/card'

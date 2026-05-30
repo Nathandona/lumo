@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import type { Product, Variant } from '@lumo-ui/utils'
-import { ProductCard } from '../src/components/product-card'
+import { ProductCard } from '../src/components/lumo/product-card'
 
 const mockVariant: Variant = {
   id: 'v1',

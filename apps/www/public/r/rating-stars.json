@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "rating-stars",
+  "title": "Rating Stars",
+  "description": "Accessible star rating with an optional review count.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "packages/core/src/components/lumo/rating-stars.tsx",
+      "content": "import * as React from \"react\"\r\nimport { Star } from \"lucide-react\"\r\n\r\nimport { cn } from \"@/lib/utils\"\r\n\r\nexport interface RatingStarsProps extends React.HTMLAttributes<HTMLDivElement> {\r\n  /** Rating value, 0 to `max`. */\r\n  value: number\r\n  max?: number\r\n  /** Number of reviews, shown in parentheses when provided. */\r\n  count?: number\r\n  size?: \"sm\" | \"md\"\r\n}\r\n\r\nconst sizeClasses = {\r\n  sm: \"h-3.5 w-3.5\",\r\n  md: \"h-4 w-4\",\r\n}\r\n\r\nconst RatingStars = React.forwardRef<HTMLDivElement, RatingStarsProps>(\r\n  ({ className, value, max = 5, count, size = \"sm\", ...props }, ref) => {\r\n    const rounded = Math.round(value)\r\n    const label =\r\n      count !== undefined\r\n        ? `Rated ${value} out of ${max}, ${count} reviews`\r\n        : `Rated ${value} out of ${max}`\r\n\r\n    return (\r\n      <div\r\n        ref={ref}\r\n        role=\"img\"\r\n        aria-label={label}\r\n        className={cn(\"flex items-center gap-1\", className)}\r\n        {...props}\r\n      >\r\n        <div className=\"flex\" aria-hidden=\"true\">\r\n          {Array.from({ length: max }, (_, i) => (\r\n            <Star\r\n              key={i}\r\n              className={cn(\r\n                sizeClasses[size],\r\n                i < rounded\r\n                  ? \"fill-yellow-400 text-yellow-400\"\r\n                  : \"fill-muted text-muted-foreground/40\"\r\n              )}\r\n            />\r\n          ))}\r\n        </div>\r\n        {count !== undefined && (\r\n          <span className=\"text-xs text-muted-foreground\" aria-hidden=\"true\">\r\n            ({count})\r\n          </span>\r\n        )}\r\n      </div>\r\n    )\r\n  }\r\n)\r\nRatingStars.displayName = \"RatingStars\"\r\n\r\nexport { RatingStars }\r\n",
+      "type": "registry:ui",
+      "target": "components/lumo/rating-stars.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}
