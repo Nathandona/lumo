@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Header } from "@/components/header"
 import { ProductShowcase } from "@/components/product-showcase"
-import { ArrowRight, CheckCircle, Zap, Shield, Palette, Code, Sparkles, Github, Star } from "lucide-react"
+import { ArrowRight, CheckCircle, Zap, Shield, Palette, Code, Sparkles, Star } from "lucide-react"
+import { GithubIcon } from "@/components/icons"
 
 export default function HomePage() {
   return (
@@ -39,7 +40,7 @@ export default function HomePage() {
             </Button>
             <Button variant="outline" size="lg" className="text-lg px-8 hover-lift" asChild>
               <a href="https://github.com/lumo-ui/lumo" target="_blank" rel="noopener noreferrer">
-                <Github className="mr-2 h-5 w-5" />
+                <GithubIcon className="mr-2 h-5 w-5" />
                 View on GitHub
               </a>
             </Button>

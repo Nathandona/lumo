@@ -4,7 +4,8 @@ import { ComponentCode } from "@/components/component-code"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { CheckCircle, Github, Terminal, Zap } from "lucide-react"
+import { CheckCircle, Terminal, Zap } from "lucide-react"
+import { GithubIcon } from "@/components/icons"
 
 export default function DocsPage() {
   return (
@@ -292,7 +293,7 @@ function App() {
             </Button>
             <Button variant="outline" size="lg" className="hover-lift" asChild>
               <a href="https://github.com/lumo-ui/lumo" target="_blank" rel="noopener noreferrer">
-                <Github className="mr-2 h-4 w-4" />
+                <GithubIcon className="mr-2 h-4 w-4" />
                 View on GitHub
               </a>
             </Button>
