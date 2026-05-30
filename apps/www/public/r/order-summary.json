@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "order-summary",
+  "title": "Order Summary",
+  "description": "A read-only order review with line items, subtotal, shipping, tax, and total.",
+  "registryDependencies": [
+    "https://lumo-www.vercel.app/r/lib.json"
+  ],
+  "files": [
+    {
+      "path": "packages/core/src/components/lumo/order-summary.tsx",
+      "content": "import * as React from \"react\"\nimport type { CartLine, Money } from \"@/lib/lumo/types\"\nimport { formatMoney } from \"@/lib/lumo/money\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport interface OrderSummaryProps extends React.HTMLAttributes<HTMLDivElement> {\n  lines: CartLine[]\n  subtotal: Money\n  shipping?: Money\n  tax?: Money\n  total?: Money\n  locale?: string\n  title?: string\n}\n\nfunction Row({ label, value, strong }: { label: string; value: string; strong?: boolean }) {\n  return (\n    <div className={cn(\"flex items-center justify-between\", strong ? \"text-base font-semibold\" : \"text-sm\")}>\n      <span className={strong ? \"\" : \"text-muted-foreground\"}>{label}</span>\n      <span className=\"tabular-nums\">{value}</span>\n    </div>\n  )\n}\n\nconst OrderSummary = React.forwardRef<HTMLDivElement, OrderSummaryProps>(\n  ({ lines, subtotal, shipping, tax, total, locale, title = \"Order summary\", className, ...props }, ref) => {\n    return (\n      <div ref={ref} className={cn(\"flex flex-col gap-4 rounded-2xl border bg-card p-6\", className)} {...props}>\n        <h3 className=\"font-semibold\">{title}</h3>\n\n        <ul className=\"flex flex-col gap-3\">\n          {lines.map((line) => {\n            const image = line.product.images[0] ?? line.variant.image\n            return (\n              <li key={line.id} className=\"flex items-center gap-3\">\n                <div className=\"relative h-12 w-12 shrink-0 overflow-hidden rounded-md border bg-muted/20\">\n                  {image && (\n                    <img src={image.url} alt={image.alt ?? line.product.title} className=\"h-full w-full object-cover\" />\n                  )}\n                  <span className=\"absolute -right-1.5 -top-1.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-foreground px-1 text-[10px] font-semibold text-background\">\n                    {line.quantity}\n                  </span>\n                </div>\n                <div className=\"min-w-0 flex-1\">\n                  <p className=\"truncate text-sm font-medium\">{line.product.title}</p>\n                  {line.variant.title && <p className=\"text-xs text-muted-foreground\">{line.variant.title}</p>}\n                </div>\n                <span className=\"text-sm tabular-nums\">{formatMoney(line.lineTotal, { locale })}</span>\n              </li>\n            )\n          })}\n        </ul>\n\n        <div className=\"flex flex-col gap-2 border-t pt-4\">\n          <Row label=\"Subtotal\" value={formatMoney(subtotal, { locale })} />\n          {shipping && <Row label=\"Shipping\" value={formatMoney(shipping, { locale })} />}\n          {tax && <Row label=\"Tax\" value={formatMoney(tax, { locale })} />}\n        </div>\n\n        {total && (\n          <div className=\"border-t pt-4\">\n            <Row label=\"Total\" value={formatMoney(total, { locale })} strong />\n          </div>\n        )}\n      </div>\n    )\n  }\n)\nOrderSummary.displayName = \"OrderSummary\"\n\nexport { OrderSummary }\n",
+      "type": "registry:ui",
+      "target": "components/lumo/order-summary.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

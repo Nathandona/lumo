@@ -20,9 +20,13 @@ const components: Comp[] = [
   { id: "price-display", name: "Price Display", description: "Formatted price with compare-at and discount support.", category: "E-commerce", tags: ["money", "currency", "discount"], preview: "" },
   { id: "rating", name: "Rating Stars", description: "Accessible star rating with an optional review count.", category: "Feedback", tags: ["accessible", "rating", "compact"], preview: "" },
   { id: "quantity-selector", name: "Quantity Stepper", description: "Accessible quantity input with increment and decrement controls.", category: "Forms", tags: ["input", "controls", "accessible"], preview: "" },
+  { id: "checkout-form", name: "Checkout Form", description: "Payment-agnostic checkout with validation, a payment slot, and order summary.", category: "Checkout", tags: ["form", "validation", "accessible"], preview: "" },
+  { id: "address-form", name: "Address Form", description: "Validated shipping address form that emits a normalized Address.", category: "Checkout", tags: ["form", "validation", "address"], preview: "" },
+  { id: "order-summary", name: "Order Summary", description: "Read-only order review with line items, totals, and tax.", category: "Checkout", tags: ["money", "review", "totals"], preview: "" },
+  { id: "order-confirmation", name: "Order Confirmation", description: "Post-purchase confirmation with order number and receipt.", category: "Checkout", tags: ["success", "receipt", "state"], preview: "" },
 ]
 
-const categoryOrder = ["All", "E-commerce", "Forms", "Feedback", "Media", "Navigation"]
+const categoryOrder = ["All", "E-commerce", "Checkout", "Forms", "Feedback", "Media", "Navigation"]
 
 export function ComponentsBrowser() {
   const [query, setQuery] = React.useState("")

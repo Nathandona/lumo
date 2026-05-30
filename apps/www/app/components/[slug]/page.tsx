@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowLeft, Copy } from "lucide-react"
 import { GithubIcon } from "@/components/icons"
 import Link from "next/link"
+import { notFound } from "next/navigation"
 
 const componentData = {
   "product-card": {
@@ -43,7 +44,7 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
   const component = componentData[slug as keyof typeof componentData]
 
   if (!component) {
-    return <div>Component not found</div>
+    notFound()
   }
 
   return (
