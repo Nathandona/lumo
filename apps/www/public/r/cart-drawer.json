@@ -8,9 +8,9 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "https://lumo.dev/r/lib.json",
-    "https://lumo.dev/r/cart-line-item.json",
-    "https://lumo.dev/r/cart-summary.json"
+    "https://lumo-www.vercel.app/r/lib.json",
+    "https://lumo-www.vercel.app/r/cart-line-item.json",
+    "https://lumo-www.vercel.app/r/cart-summary.json"
   ],
   "files": [
     {

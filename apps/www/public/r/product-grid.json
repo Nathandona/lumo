@@ -4,8 +4,8 @@
   "title": "Product Grid",
   "description": "Responsive product grid with loading skeletons and an empty state.",
   "registryDependencies": [
-    "https://lumo.dev/r/lib.json",
-    "https://lumo.dev/r/product-card.json"
+    "https://lumo-www.vercel.app/r/lib.json",
+    "https://lumo-www.vercel.app/r/product-card.json"
   ],
   "files": [
     {

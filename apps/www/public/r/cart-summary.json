@@ -4,7 +4,7 @@
   "title": "Cart Summary",
   "description": "Subtotal, optional total, taxes-and-shipping note, and a checkout button.",
   "registryDependencies": [
-    "https://lumo.dev/r/lib.json"
+    "https://lumo-www.vercel.app/r/lib.json"
   ],
   "files": [
     {
