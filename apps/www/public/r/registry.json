@@ -165,6 +165,68 @@
           "target": "components/lumo/cart-drawer.tsx"
         }
       ]
+    },
+    {
+      "name": "address-form",
+      "type": "registry:ui",
+      "title": "Address Form",
+      "description": "A validated shipping/billing address form (react-hook-form + zod) that emits a normalized Address.",
+      "dependencies": ["react-hook-form", "zod", "@hookform/resolvers"],
+      "registryDependencies": ["https://lumo-www.vercel.app/r/lib.json"],
+      "files": [
+        {
+          "path": "packages/core/src/components/lumo/address-form.tsx",
+          "type": "registry:ui",
+          "target": "components/lumo/address-form.tsx"
+        }
+      ]
+    },
+    {
+      "name": "order-summary",
+      "type": "registry:ui",
+      "title": "Order Summary",
+      "description": "A read-only order review with line items, subtotal, shipping, tax, and total.",
+      "registryDependencies": ["https://lumo-www.vercel.app/r/lib.json"],
+      "files": [
+        {
+          "path": "packages/core/src/components/lumo/order-summary.tsx",
+          "type": "registry:ui",
+          "target": "components/lumo/order-summary.tsx"
+        }
+      ]
+    },
+    {
+      "name": "checkout-form",
+      "type": "registry:ui",
+      "title": "Checkout Form",
+      "description": "A payment-agnostic checkout: contact and shipping fields with validation, a payment slot, an order summary, and submit states. Wire your own PSP.",
+      "dependencies": ["react-hook-form", "zod", "@hookform/resolvers"],
+      "registryDependencies": [
+        "https://lumo-www.vercel.app/r/lib.json",
+        "https://lumo-www.vercel.app/r/order-summary.json"
+      ],
+      "files": [
+        {
+          "path": "packages/core/src/components/lumo/checkout-form.tsx",
+          "type": "registry:ui",
+          "target": "components/lumo/checkout-form.tsx"
+        }
+      ]
+    },
+    {
+      "name": "order-confirmation",
+      "type": "registry:ui",
+      "title": "Order Confirmation",
+      "description": "A post-purchase confirmation with order number, receipt email, item summary, and total.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["https://lumo-www.vercel.app/r/lib.json"],
+      "files": [
+        {
+          "path": "packages/core/src/components/lumo/order-confirmation.tsx",
+          "type": "registry:ui",
+          "target": "components/lumo/order-confirmation.tsx"
+        }
+      ]
     }
   ]
 }

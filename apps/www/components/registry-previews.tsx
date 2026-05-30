@@ -8,6 +8,9 @@ import {
   PriceDisplay,
   RatingStars,
   QuantityStepper,
+  AddressForm,
+  OrderSummary,
+  OrderConfirmation,
   type Product,
   type Variant,
   type SelectedOption,
@@ -44,6 +47,18 @@ const vsVariants: Variant[] = [
   { id: "m", price: { amount: 5000, currency: "USD" }, selectedOptions: [{ name: "Size", value: "M" }], available: true },
   { id: "l", price: { amount: 5000, currency: "USD" }, selectedOptions: [{ name: "Size", value: "L" }], available: false },
 ]
+
+const sampleLines: CartLine[] = [
+  {
+    id: "v1",
+    variant: lamp.variants[0],
+    product: { id: lamp.id, handle: lamp.handle, title: lamp.title, images: lamp.images },
+    quantity: 1,
+    lineTotal: { amount: 12900, currency: "USD" },
+  },
+]
+const sampleSubtotal = { amount: 12900, currency: "USD" }
+const sampleTotal = { amount: 13932, currency: "USD" }
 
 function VariantPreview() {
   const [value, setValue] = React.useState<SelectedOption[]>([{ name: "Size", value: "M" }])
@@ -104,6 +119,33 @@ export function RegistryPreview({ id }: { id: string }) {
       return <RatingStars value={4.5} count={128} size="md" />
     case "quantity-selector":
       return <QuantityPreview />
+    case "address-form":
+      return (
+        <div className="w-full max-w-xs">
+          <AddressForm onSubmit={() => {}} submitLabel="Save address" />
+        </div>
+      )
+    case "order-summary":
+      return (
+        <div className="w-full max-w-xs">
+          <OrderSummary lines={sampleLines} subtotal={sampleSubtotal} total={sampleTotal} />
+        </div>
+      )
+    case "checkout-form":
+      return (
+        <div className="flex w-full max-w-xs flex-col gap-3">
+          <OrderSummary lines={sampleLines} subtotal={sampleSubtotal} total={sampleTotal} title="Checkout" />
+          <button className="inline-flex h-11 w-full items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">
+            Place order
+          </button>
+        </div>
+      )
+    case "order-confirmation":
+      return (
+        <div className="w-full max-w-xs">
+          <OrderConfirmation orderNumber="LUMO-40271" lines={sampleLines} total={sampleTotal} />
+        </div>
+      )
     default:
       return null
   }

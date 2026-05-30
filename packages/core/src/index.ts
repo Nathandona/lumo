@@ -31,5 +31,11 @@ export * from './components/lumo/cart-line-item'
 export * from './components/lumo/cart-summary'
 export * from './components/lumo/cart-drawer'
 
+// Checkout
+export * from './components/lumo/address-form'
+export * from './components/lumo/order-summary'
+export * from './components/lumo/checkout-form'
+export * from './components/lumo/order-confirmation'
+
 // Layout
 export * from './components/card'
