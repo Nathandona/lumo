@@ -74,7 +74,7 @@ const VariantSelector = React.forwardRef<HTMLDivElement, VariantSelectorProps>(
                       disabled={!available}
                       onClick={() => select(option.name, optionValue)}
                       className={cn(
-                        "min-w-9 rounded-md border px-3 py-1.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                        "min-w-9 rounded-md border px-3 py-1.5 text-sm font-medium transition-[color,background-color,border-color,transform] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                         isSelected
                           ? "border-primary bg-primary text-primary-foreground"
                           : "border-input bg-background text-foreground hover:bg-accent",
