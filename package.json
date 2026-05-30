@@ -1,8 +1,32 @@
 {
   "name": "lumo-ui",
   "version": "0.1.0",
-  "description": "Beautiful e-commerce components for modern React apps",
+  "description": "Beautiful, accessible e-commerce components for modern React apps, built on shadcn/ui and TypeScript.",
   "private": true,
+  "keywords": [
+    "react",
+    "react-components",
+    "ui-library",
+    "component-library",
+    "ecommerce",
+    "e-commerce",
+    "shadcn-ui",
+    "radix-ui",
+    "tailwindcss",
+    "typescript",
+    "accessibility",
+    "wcag",
+    "design-system",
+    "headless-ui",
+    "product-card",
+    "react-hooks",
+    "monorepo"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nathandona/lumo.git"
+  },
+  "license": "MIT",
   "workspaces": [
     "packages/*",
     "apps/*"
