@@ -170,7 +170,7 @@ export function useCheckout() {
       default:
         return true
     }
-  }, [state.formData, state.selectedShipping, state.selectedPayment])
+  }, [state])
 
   return {
     ...state,

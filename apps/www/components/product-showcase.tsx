@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { ProductCard, type Product } from "@lumo-ui/core"
-import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ShoppingCart, Heart, Eye } from "lucide-react"
 
@@ -44,7 +43,7 @@ const sampleProducts: Product[] = [
 
 export function ProductShowcase() {
   const [wishlist, setWishlist] = useState<Set<string>>(new Set())
-  const [cart, setCart] = useState<Set<string>>(new Set())
+  const [, setCart] = useState<Set<string>>(new Set())
 
   const handleAddToCart = (product: Product) => {
     setCart(prev => new Set(prev).add(product.id))

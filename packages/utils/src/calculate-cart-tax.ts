@@ -1,10 +1,10 @@
-import type { CartItem } from '@lumo-ui/hooks'
+import type { CartTotalItem } from './calculate-cart-total'
 
 /**
  * Calculate tax for cart items
  */
 export function calculateCartTax(
-  items: CartItem[],
+  items: CartTotalItem[],
   taxRate = 0.08 // 8% default tax rate
 ): number {
   const subtotal = items.reduce((total, item) => total + item.price * item.quantity, 0)
@@ -15,7 +15,7 @@ export function calculateCartTax(
  * Calculate total including tax
  */
 export function calculateTotalWithTax(
-  items: CartItem[],
+  items: CartTotalItem[],
   taxRate = 0.08
 ): number {
   const subtotal = items.reduce((total, item) => total + item.price * item.quantity, 0)

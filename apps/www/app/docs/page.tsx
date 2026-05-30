@@ -1,9 +1,10 @@
+import Link from "next/link"
 import { Header } from "@/components/header"
 import { ComponentCode } from "@/components/component-code"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { CheckCircle, Copy, Github, Terminal, Zap } from "lucide-react"
+import { CheckCircle, Github, Terminal, Zap } from "lucide-react"
 
 export default function DocsPage() {
   return (
@@ -285,9 +286,9 @@ function App() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="hover-lift" asChild>
-              <a href="/components">
+              <Link href="/components">
                 Browse Components
-              </a>
+              </Link>
             </Button>
             <Button variant="outline" size="lg" className="hover-lift" asChild>
               <a href="https://github.com/lumo-ui/lumo" target="_blank" rel="noopener noreferrer">

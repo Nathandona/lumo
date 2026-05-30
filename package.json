@@ -40,6 +40,7 @@
     "type-check": "turbo run type-check",
     "clean": "turbo run clean",
     "storybook": "turbo run storybook",
+    "registry:build": "shadcn build registry.json --output apps/www/public/r",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "turbo run build --filter=./packages/* && changeset publish"
