@@ -60,3 +60,9 @@ Thumbs.db
 
 # Changeset
 .changeset/
+
+# Local skill installs and design scratch (not part of the product)
+.agents/
+skills-lock.json
+design/
+.playwright-mcp/

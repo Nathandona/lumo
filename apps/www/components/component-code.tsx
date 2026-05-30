@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
-import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism"
+import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism"
 
 interface ComponentCodeProps {
   code: string
@@ -11,19 +11,25 @@ interface ComponentCodeProps {
 
 export function ComponentCode({ code, language = "tsx" }: ComponentCodeProps) {
   return (
-    <div className="rounded-md overflow-hidden">
-      <SyntaxHighlighter
-        language={language}
-        style={oneDark}
-        customStyle={{
-          margin: 0,
-          borderRadius: 0,
-          fontSize: "0.875rem",
-          background: "hsl(var(--muted))",
-        }}
-      >
-        {code}
-      </SyntaxHighlighter>
-    </div>
+    <SyntaxHighlighter
+      language={language}
+      style={oneLight}
+      customStyle={{
+        margin: 0,
+        padding: 0,
+        background: "transparent",
+        fontSize: "0.825rem",
+        lineHeight: 1.7,
+      }}
+      codeTagProps={{
+        style: {
+          background: "transparent",
+          fontFamily: "var(--font-mono), ui-monospace, monospace",
+          textShadow: "none",
+        },
+      }}
+    >
+      {code}
+    </SyntaxHighlighter>
   )
 }

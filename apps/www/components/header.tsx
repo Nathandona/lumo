@@ -2,9 +2,8 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { Menu, Search } from "lucide-react"
+import { Menu } from "lucide-react"
 import { GithubIcon } from "@/components/icons"
-import { ThemeToggle } from "@/components/theme-toggle"
 import { Button } from "@/components/ui/button"
 import {
   Sheet,
@@ -12,109 +11,73 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 
+const navigation = [
+  { name: "Components", href: "/components" },
+  { name: "Docs", href: "/docs" },
+  { name: "Examples", href: "/examples" },
+]
+
 export function Header() {
   const [isOpen, setIsOpen] = React.useState(false)
 
-  const navigation = [
-    { name: "Components", href: "/components" },
-    { name: "Documentation", href: "/docs" },
-    { name: "Examples", href: "/examples" },
-  ]
-
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 max-w-screen-2xl items-center">
-        <div className="mr-4 hidden md:flex">
-          <Link href="/" className="mr-6 flex items-center space-x-2">
-            <span className="hidden font-bold sm:inline-block text-gradient">
-              Lumo UI
-            </span>
-          </Link>
-          <nav className="flex items-center space-x-6 text-sm font-medium">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="transition-colors hover:text-foreground/80 text-foreground/60"
-              >
-                {item.name}
-              </Link>
-            ))}
-          </nav>
-        </div>
+    <header className="sticky top-0 z-50 flex justify-center px-4 py-4">
+      <div className="glass flex h-14 w-full max-w-5xl items-center justify-between rounded-full pl-5 pr-3">
+        <Link href="/" className="flex items-center gap-2.5">
+          <span className="h-3.5 w-3.5 rounded-full bg-[radial-gradient(circle_at_35%_35%,#FFE9A8,hsl(var(--primary)))] shadow-[0_0_12px_hsl(var(--primary))]" />
+          <span className="font-display text-xl font-bold tracking-tight">Lumo</span>
+        </Link>
 
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild>
-            <Button
-              variant="ghost"
-              className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
+        <nav className="hidden items-center gap-1 md:flex">
+          {navigation.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className="rounded-full px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
             >
-              <Menu className="h-5 w-5" />
-              <span className="sr-only">Toggle Menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="left" className="pr-0">
-            <MobileHeader navigation={navigation} />
-          </SheetContent>
-        </Sheet>
+              {item.name}
+            </Link>
+          ))}
+        </nav>
 
-        <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-          <div className="w-full flex-1 md:w-auto md:flex-none">
-            <Button variant="outline" className="h-9 w-full justify-start text-sm md:w-64 lg:w-96">
-              <Search className="mr-2 h-4 w-4" />
-              <span className="text-muted-foreground">Search components...</span>
-            </Button>
-          </div>
-          <nav className="flex items-center space-x-2">
-            <ThemeToggle />
-            <Button asChild size="sm" variant="ghost">
-              <a
-                href="https://github.com/lumo-ui/lumo"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center space-x-2"
-              >
-                <GithubIcon className="h-4 w-4" />
-                <span className="hidden sm:inline">GitHub</span>
-              </a>
-            </Button>
-          </nav>
+        <div className="flex items-center gap-2">
+          <Button asChild size="sm" className="hidden rounded-full sm:inline-flex">
+            <a href="https://github.com/Nathandona/lumo" target="_blank" rel="noopener noreferrer" className="gap-2">
+              <GithubIcon className="h-4 w-4" />
+              GitHub
+            </a>
+          </Button>
+
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="rounded-full md:hidden">
+                <Menu className="h-5 w-5" />
+                <span className="sr-only">Toggle menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="border-l">
+              <nav className="mt-10 flex flex-col gap-2">
+                {navigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className="rounded-xl px-4 py-3 text-base font-medium text-foreground transition-colors hover:bg-accent"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+                <Button asChild className="mt-4 rounded-full">
+                  <a href="https://github.com/Nathandona/lumo" target="_blank" rel="noopener noreferrer" className="gap-2">
+                    <GithubIcon className="h-4 w-4" />
+                    GitHub
+                  </a>
+                </Button>
+              </nav>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </header>
-  )
-}
-
-function MobileHeader({ navigation }: { navigation: Array<{ name: string; href: string }> }) {
-  return (
-    <div className="flex flex-col space-y-4">
-      <Link href="/" className="flex items-center space-x-2">
-        <span className="font-bold text-gradient">Lumo UI</span>
-      </Link>
-      <nav className="flex flex-col space-y-3 text-sm font-medium">
-        {navigation.map((item) => (
-          <Link
-            key={item.name}
-            href={item.href}
-            className="transition-colors hover:text-foreground/80 text-foreground/60"
-          >
-            {item.name}
-          </Link>
-        ))}
-      </nav>
-      <div className="flex flex-col space-y-3 border-t pt-4">
-        <Button asChild variant="outline" className="justify-start">
-          <a
-            href="https://github.com/lumo-ui/lumo"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center space-x-2"
-          >
-            <GithubIcon className="h-4 w-4" />
-            <span>GitHub</span>
-          </a>
-        </Button>
-      </div>
-    </div>
   )
 }
