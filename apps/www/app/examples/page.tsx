@@ -1,3 +1,5 @@
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 import { Header } from "@/components/header"
 import { ProductShowcase } from "@/components/product-showcase"
 import { CheckoutDemo } from "@/components/checkout-demo"
@@ -26,11 +28,19 @@ export default function ExamplesPage() {
         <div data-reveal className="mt-16">
           <h2 className="font-display text-2xl font-bold tracking-tight md:text-3xl">Checkout, end to end</h2>
           <p className="mt-2 text-muted-foreground">
-            Validated and payment-agnostic. Fill it in and place the order to see the confirmation.
+            Validated and payment-agnostic. The payment slot below holds a Stripe-styled element. Fill it in and place
+            the order to see the confirmation.
           </p>
           <div className="glass mt-6 rounded-3xl p-6 md:p-8">
             <CheckoutDemo />
           </div>
+          <Link
+            href="/examples/stripe"
+            className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-honey transition-all hover:gap-2.5"
+          >
+            See the full Stripe wiring, end to end
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </div>
     </div>

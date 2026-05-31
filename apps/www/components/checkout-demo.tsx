@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { CheckoutForm, OrderConfirmation, type CartLine } from "@lumo-ui/core"
+import { MockPaymentElement } from "@/components/mock-payment-element"
 
 const lines: CartLine[] = [
   {
@@ -55,6 +56,7 @@ export function CheckoutDemo() {
       subtotal={subtotal}
       tax={tax}
       total={total}
+      paymentSlot={<MockPaymentElement />}
       onSubmit={async () => {
         await new Promise((r) => setTimeout(r, 700))
         setOrder("LUMO-" + Math.floor(10000 + Math.random() * 89999))
