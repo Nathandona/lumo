@@ -37,10 +37,10 @@ jobs:
       - name: Type-check
         run: pnpm type-check
 
-      # Storybook is excluded: its build is not yet CI-ready (interactive
-      # telemetry prompt and an unresolved import). Tracked for a later pass.
+      # Storybook has no test suite, so it is filtered out of the test task only.
       - name: Test
         run: pnpm test --filter=!@lumo-ui/storybook
 
+      # Build everything, including the Storybook static site.
       - name: Build
-        run: pnpm build --filter=!@lumo-ui/storybook
+        run: pnpm build

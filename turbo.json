@@ -4,7 +4,7 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**", "dist/**", "!dist/**/*.test.*"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**", "!dist/**/*.test.*", "storybook-static/**"],
       "env": ["NODE_ENV"]
     },
     "dev": {
