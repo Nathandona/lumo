@@ -35,13 +35,16 @@ function Field({
 }: {
   label: string
   error?: string
-  children: React.ReactNode
+  children: React.ReactElement
   className?: string
 }) {
+  const id = React.useId()
   return (
     <div className={cn("flex flex-col gap-1.5", className)}>
-      <label className="text-sm font-medium">{label}</label>
-      {children}
+      <label htmlFor={id} className="text-sm font-medium">
+        {label}
+      </label>
+      {React.cloneElement(children, { id, "aria-invalid": error ? true : undefined } as Record<string, unknown>)}
       {error && <span className="text-xs text-destructive">{error}</span>}
     </div>
   )
