@@ -30,6 +30,7 @@ export * from './components/lumo/variant-selector'
 export * from './components/lumo/cart-line-item'
 export * from './components/lumo/cart-summary'
 export * from './components/lumo/cart-drawer'
+export * from './components/lumo/cart-provider'
 
 // Checkout
 export * from './components/lumo/address-form'

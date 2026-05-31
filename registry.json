@@ -167,6 +167,20 @@
       ]
     },
     {
+      "name": "cart-provider",
+      "type": "registry:hook",
+      "title": "Cart Provider",
+      "description": "Optional, backend-agnostic cart state. A CartProvider context and useCart hook that add lines, merge duplicate variants, update quantities, and compute the subtotal. Sync to your backend through onLinesChange.",
+      "registryDependencies": ["https://lumo-www.vercel.app/r/lib.json"],
+      "files": [
+        {
+          "path": "packages/core/src/components/lumo/cart-provider.tsx",
+          "type": "registry:hook",
+          "target": "components/lumo/cart-provider.tsx"
+        }
+      ]
+    },
+    {
       "name": "address-form",
       "type": "registry:ui",
       "title": "Address Form",
