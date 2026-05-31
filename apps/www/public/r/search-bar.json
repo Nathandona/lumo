@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "search-bar",
+  "title": "Search Bar",
+  "description": "A controlled, accessible search input with a clear button and an optional loading spinner. Submit on Enter for query-on-submit search.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "packages/core/src/components/lumo/search-bar.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Search, X, Loader2 } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport interface SearchBarProps extends Omit<React.HTMLAttributes<HTMLFormElement>, \"onSubmit\"> {\n  value: string\n  onValueChange: (value: string) => void\n  /** Fired when the user submits (Enter). Useful for query-on-submit search. */\n  onSubmit?: (value: string) => void\n  placeholder?: string\n  /** Show a spinner in place of the clear button while results load. */\n  loading?: boolean\n  /** Accessible label for the input. Defaults to \"Search\". */\n  label?: string\n  size?: \"sm\" | \"md\"\n}\n\nconst SearchBar = React.forwardRef<HTMLFormElement, SearchBarProps>(\n  (\n    { className, value, onValueChange, onSubmit, placeholder = \"Search\", loading = false, label = \"Search\", size = \"md\", ...props },\n    ref\n  ) => {\n    const height = size === \"sm\" ? \"h-9\" : \"h-11\"\n\n    return (\n      <form\n        ref={ref}\n        role=\"search\"\n        onSubmit={(event) => {\n          event.preventDefault()\n          onSubmit?.(value)\n        }}\n        className={cn(\n          \"group relative flex items-center rounded-full border border-input bg-background transition-colors focus-within:border-ring focus-within:ring-2 focus-within:ring-ring\",\n          height,\n          className\n        )}\n        {...props}\n      >\n        <Search className=\"pointer-events-none absolute left-4 h-4 w-4 text-muted-foreground\" />\n        <input\n          type=\"search\"\n          aria-label={label}\n          value={value}\n          placeholder={placeholder}\n          onChange={(event) => onValueChange(event.target.value)}\n          className=\"h-full w-full rounded-full bg-transparent pl-11 pr-11 text-sm placeholder:text-muted-foreground/60 focus-visible:outline-none [&::-webkit-search-cancel-button]:appearance-none\"\n        />\n        {loading ? (\n          <Loader2 className=\"absolute right-4 h-4 w-4 animate-spin text-muted-foreground\" aria-hidden />\n        ) : (\n          value && (\n            <button\n              type=\"button\"\n              onClick={() => onValueChange(\"\")}\n              aria-label=\"Clear search\"\n              className=\"absolute right-2 flex h-7 w-7 items-center justify-center rounded-full text-muted-foreground transition-[color,background-color,transform] hover:bg-accent hover:text-foreground active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\"\n            >\n              <X className=\"h-4 w-4\" />\n            </button>\n          )\n        )}\n      </form>\n    )\n  }\n)\nSearchBar.displayName = \"SearchBar\"\n\nexport { SearchBar }\n",
+      "type": "registry:ui",
+      "target": "components/lumo/search-bar.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

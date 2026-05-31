@@ -5,12 +5,13 @@
 
 export const REGISTRY_BASE_URL = "https://lumo-www.vercel.app/r"
 
-export type Category = "Primitives" | "Product" | "Cart" | "Checkout"
+export type Category = "Primitives" | "Product" | "Discovery" | "Cart" | "Checkout"
 
 export const CATEGORY_ORDER: Array<"All" | Category> = [
   "All",
   "Primitives",
   "Product",
+  "Discovery",
   "Cart",
   "Checkout",
 ]
@@ -194,6 +195,131 @@ export const REGISTRY: RegistryEntry[] = [
       { name: "onAddToCart", type: "(product, variant) => void", description: "Forwarded to each card." },
       { name: "isInWishlist", type: "(product) => boolean", description: "Per-product wishlist state." },
       { name: "locale", type: "string", description: "BCP-47 locale for price formatting." },
+    ],
+  },
+
+  // ---- Discovery ----------------------------------------------------------
+  {
+    slug: "search-bar",
+    title: "Search Bar",
+    description: "Accessible search input with a clear button and loading state.",
+    detail:
+      "A controlled search input with a leading icon, a clear button, and an optional loading spinner. Submit on Enter for query-on-submit search.",
+    category: "Discovery",
+    tags: ["search", "input", "accessible"],
+    dependencies: ["lucide-react"],
+    registryDependencies: [],
+    importCode: `import { SearchBar } from "@/components/lumo/search-bar"`,
+    usageCode: `const [query, setQuery] = useState("")
+
+<SearchBar
+  value={query}
+  onValueChange={setQuery}
+  onSubmit={(q) => router.push(\`/search?q=\${q}\`)}
+  placeholder="Search products"
+/>`,
+    props: [
+      { name: "value", type: "string", required: true, description: "Current query (controlled)." },
+      { name: "onValueChange", type: "(value: string) => void", required: true, description: "Fired on every keystroke." },
+      { name: "onSubmit", type: "(value: string) => void", description: "Fired on Enter; for query-on-submit search." },
+      { name: "placeholder", type: "string", default: '"Search"', description: "Input placeholder." },
+      { name: "loading", type: "boolean", description: "Swap the clear button for a spinner." },
+      { name: "size", type: '"sm" | "md"', default: '"md"', description: "Control size." },
+    ],
+  },
+  {
+    slug: "sort-select",
+    title: "Sort Select",
+    description: "Sort-order dropdown with sensible default options.",
+    detail:
+      "A sort-order dropdown built on a native select for full accessibility. Ships with a default set of e-commerce options; pass your own items to customize.",
+    category: "Discovery",
+    tags: ["sort", "select", "accessible"],
+    dependencies: ["lucide-react"],
+    registryDependencies: [],
+    importCode: `import { SortSelect, defaultSortItems } from "@/components/lumo/sort-select"`,
+    usageCode: `const [sort, setSort] = useState("featured")
+
+<SortSelect value={sort} onValueChange={setSort} />`,
+    props: [
+      { name: "value", type: "string", required: true, description: "Selected sort value (controlled)." },
+      { name: "onValueChange", type: "(value: string) => void", required: true, description: "Fired when the selection changes." },
+      { name: "items", type: "SortItem[]", default: "defaultSortItems", description: "Override the available options." },
+      { name: "size", type: '"sm" | "md"', default: '"md"', description: "Control size." },
+    ],
+  },
+  {
+    slug: "filter-panel",
+    title: "Filter Panel",
+    description: "Faceted checkbox filters with counts and clear-all.",
+    detail:
+      "A faceted filter panel: groups of checkboxes with optional result counts, an active-filter count badge, and a clear-all control. Fully controlled by a value keyed on group id.",
+    category: "Discovery",
+    tags: ["filter", "facets", "checkbox"],
+    dependencies: ["lucide-react"],
+    registryDependencies: [],
+    importCode: `import { FilterPanel } from "@/components/lumo/filter-panel"`,
+    usageCode: `const [filters, setFilters] = useState({})
+
+<FilterPanel
+  groups={[
+    { id: "size", label: "Size", options: [
+      { value: "s", label: "Small", count: 12 },
+      { value: "m", label: "Medium", count: 8 },
+    ] },
+  ]}
+  value={filters}
+  onValueChange={setFilters}
+/>`,
+    props: [
+      { name: "groups", type: "FilterGroup[]", required: true, description: "Facet groups with their options." },
+      { name: "value", type: "Record<string, string[]>", required: true, description: "Selected values keyed by group id." },
+      { name: "onValueChange", type: "(value) => void", required: true, description: "Fired with the next selection." },
+      { name: "title", type: "string", default: '"Filters"', description: "Panel heading." },
+    ],
+  },
+  {
+    slug: "pagination",
+    title: "Pagination",
+    description: "Accessible page navigation with a truncated range.",
+    detail:
+      "Accessible page navigation with previous and next controls and a truncated page range with ellipses. Renders nothing for a single page.",
+    category: "Discovery",
+    tags: ["pagination", "navigation", "accessible"],
+    dependencies: ["lucide-react"],
+    registryDependencies: [],
+    importCode: `import { Pagination } from "@/components/lumo/pagination"`,
+    usageCode: `const [page, setPage] = useState(1)
+
+<Pagination page={page} pageCount={12} onPageChange={setPage} />`,
+    props: [
+      { name: "page", type: "number", required: true, description: "Current page (1-based)." },
+      { name: "pageCount", type: "number", required: true, description: "Total number of pages." },
+      { name: "onPageChange", type: "(page: number) => void", required: true, description: "Fired with the requested page." },
+      { name: "siblingCount", type: "number", default: "1", description: "Pages shown on each side of the current page." },
+    ],
+  },
+  {
+    slug: "breadcrumbs",
+    title: "Breadcrumbs",
+    description: "Accessible breadcrumb trail with a current-page marker.",
+    detail:
+      "An accessible breadcrumb trail. The last crumb is marked as the current page; pass href on the rest to make them links. Swap the separator with any node.",
+    category: "Discovery",
+    tags: ["navigation", "breadcrumb", "accessible"],
+    dependencies: ["lucide-react"],
+    registryDependencies: [],
+    importCode: `import { Breadcrumbs } from "@/components/lumo/breadcrumbs"`,
+    usageCode: `<Breadcrumbs
+  items={[
+    { label: "Home", href: "/" },
+    { label: "Lighting", href: "/lighting" },
+    { label: "Aurora Lamp" },
+  ]}
+/>`,
+    props: [
+      { name: "items", type: "Crumb[]", required: true, description: "Ordered crumbs; the last is the current page." },
+      { name: "separator", type: "ReactNode", description: "Custom separator between crumbs." },
     ],
   },
 
