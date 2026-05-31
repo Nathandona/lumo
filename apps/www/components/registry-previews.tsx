@@ -10,6 +10,12 @@ import {
   CartProvider,
   useCart,
   VariantSelector,
+  SearchBar,
+  SortSelect,
+  FilterPanel,
+  Pagination,
+  Breadcrumbs,
+  type FilterValue,
   PriceDisplay,
   RatingStars,
   QuantityStepper,
@@ -175,6 +181,53 @@ function CartProviderPreview() {
   )
 }
 
+function SearchBarPreview() {
+  const [query, setQuery] = React.useState("aurora lamp")
+  return (
+    <div className="w-full max-w-sm">
+      <SearchBar value={query} onValueChange={setQuery} placeholder="Search products" />
+    </div>
+  )
+}
+
+function SortSelectPreview() {
+  const [sort, setSort] = React.useState("featured")
+  return <SortSelect value={sort} onValueChange={setSort} />
+}
+
+function FilterPanelPreview() {
+  const [value, setValue] = React.useState<FilterValue>({ size: ["m"] })
+  return (
+    <div className="w-full max-w-[220px]">
+      <FilterPanel
+        groups={[
+          {
+            id: "size",
+            label: "Size",
+            options: [
+              { value: "s", label: "Small", count: 12 },
+              { value: "m", label: "Medium", count: 8 },
+              { value: "l", label: "Large", count: 5 },
+            ],
+          },
+          {
+            id: "availability",
+            label: "Availability",
+            options: [{ value: "in-stock", label: "In stock", count: 21 }],
+          },
+        ]}
+        value={value}
+        onValueChange={setValue}
+      />
+    </div>
+  )
+}
+
+function PaginationPreview() {
+  const [page, setPage] = React.useState(3)
+  return <Pagination page={page} pageCount={12} onPageChange={setPage} />
+}
+
 export function RegistryPreview({ id }: { id: string }) {
   switch (id) {
     case "price-display":
@@ -202,6 +255,24 @@ export function RegistryPreview({ id }: { id: string }) {
         <div className="w-full max-w-md">
           <ProductGrid products={[lamp, chair]} columns={2} />
         </div>
+      )
+    case "search-bar":
+      return <SearchBarPreview />
+    case "sort-select":
+      return <SortSelectPreview />
+    case "filter-panel":
+      return <FilterPanelPreview />
+    case "pagination":
+      return <PaginationPreview />
+    case "breadcrumbs":
+      return (
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "#" },
+            { label: "Lighting", href: "#" },
+            { label: "Aurora Lamp" },
+          ]}
+        />
       )
     case "cart-line-item":
       return <CartLineItemPreview />

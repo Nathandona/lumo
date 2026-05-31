@@ -115,6 +115,76 @@
       ]
     },
     {
+      "name": "search-bar",
+      "type": "registry:ui",
+      "title": "Search Bar",
+      "description": "A controlled, accessible search input with a clear button and an optional loading spinner. Submit on Enter for query-on-submit search.",
+      "dependencies": ["lucide-react"],
+      "files": [
+        {
+          "path": "packages/core/src/components/lumo/search-bar.tsx",
+          "type": "registry:ui",
+          "target": "components/lumo/search-bar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sort-select",
+      "type": "registry:ui",
+      "title": "Sort Select",
+      "description": "A sort-order dropdown with a sensible default set of e-commerce options (featured, price, rating, newest). Bring your own items to customize.",
+      "dependencies": ["lucide-react"],
+      "files": [
+        {
+          "path": "packages/core/src/components/lumo/sort-select.tsx",
+          "type": "registry:ui",
+          "target": "components/lumo/sort-select.tsx"
+        }
+      ]
+    },
+    {
+      "name": "filter-panel",
+      "type": "registry:ui",
+      "title": "Filter Panel",
+      "description": "A faceted filter panel: groups of checkboxes with optional result counts, an active-filter count, and a clear-all control. Fully controlled.",
+      "dependencies": ["lucide-react"],
+      "files": [
+        {
+          "path": "packages/core/src/components/lumo/filter-panel.tsx",
+          "type": "registry:ui",
+          "target": "components/lumo/filter-panel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pagination",
+      "type": "registry:ui",
+      "title": "Pagination",
+      "description": "Accessible page navigation with previous/next controls and a truncated page range with ellipses.",
+      "dependencies": ["lucide-react"],
+      "files": [
+        {
+          "path": "packages/core/src/components/lumo/pagination.tsx",
+          "type": "registry:ui",
+          "target": "components/lumo/pagination.tsx"
+        }
+      ]
+    },
+    {
+      "name": "breadcrumbs",
+      "type": "registry:ui",
+      "title": "Breadcrumbs",
+      "description": "An accessible breadcrumb trail. The last crumb is marked as the current page; pass href on the rest to make them links.",
+      "dependencies": ["lucide-react"],
+      "files": [
+        {
+          "path": "packages/core/src/components/lumo/breadcrumbs.tsx",
+          "type": "registry:ui",
+          "target": "components/lumo/breadcrumbs.tsx"
+        }
+      ]
+    },
+    {
       "name": "cart-line-item",
       "type": "registry:ui",
       "title": "Cart Line Item",

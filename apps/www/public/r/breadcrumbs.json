@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "breadcrumbs",
+  "title": "Breadcrumbs",
+  "description": "An accessible breadcrumb trail. The last crumb is marked as the current page; pass href on the rest to make them links.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "packages/core/src/components/lumo/breadcrumbs.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { ChevronRight } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport interface Crumb {\n  label: string\n  /** Omit on the current page. */\n  href?: string\n}\n\nexport interface BreadcrumbsProps extends React.HTMLAttributes<HTMLElement> {\n  items: Crumb[]\n  /** Separator between crumbs. Defaults to a chevron. */\n  separator?: React.ReactNode\n}\n\nconst Breadcrumbs = React.forwardRef<HTMLElement, BreadcrumbsProps>(\n  ({ className, items, separator, ...props }, ref) => {\n    const sep = separator ?? <ChevronRight className=\"h-3.5 w-3.5 text-muted-foreground/50\" aria-hidden />\n\n    return (\n      <nav ref={ref} aria-label=\"Breadcrumb\" className={cn(\"text-sm\", className)} {...props}>\n        <ol className=\"flex flex-wrap items-center gap-1.5\">\n          {items.map((item, index) => {\n            const isLast = index === items.length - 1\n            return (\n              <li key={`${item.label}-${index}`} className=\"inline-flex items-center gap-1.5\">\n                {item.href && !isLast ? (\n                  <a\n                    href={item.href}\n                    className=\"text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded\"\n                  >\n                    {item.label}\n                  </a>\n                ) : (\n                  <span className={cn(isLast ? \"font-medium text-foreground\" : \"text-muted-foreground\")} aria-current={isLast ? \"page\" : undefined}>\n                    {item.label}\n                  </span>\n                )}\n                {!isLast && sep}\n              </li>\n            )\n          })}\n        </ol>\n      </nav>\n    )\n  }\n)\nBreadcrumbs.displayName = \"Breadcrumbs\"\n\nexport { Breadcrumbs }\n",
+      "type": "registry:ui",
+      "target": "components/lumo/breadcrumbs.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

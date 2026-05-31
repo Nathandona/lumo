@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sort-select",
+  "title": "Sort Select",
+  "description": "A sort-order dropdown with a sensible default set of e-commerce options (featured, price, rating, newest). Bring your own items to customize.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "packages/core/src/components/lumo/sort-select.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { ArrowUpDown, ChevronDown } from \"lucide-react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport interface SortItem {\n  value: string\n  label: string\n}\n\n/** A sensible default set of e-commerce sort options. */\nexport const defaultSortItems: SortItem[] = [\n  { value: \"featured\", label: \"Featured\" },\n  { value: \"newest\", label: \"Newest\" },\n  { value: \"price-asc\", label: \"Price: Low to High\" },\n  { value: \"price-desc\", label: \"Price: High to Low\" },\n  { value: \"rating\", label: \"Highest rated\" },\n  { value: \"name-asc\", label: \"Name: A to Z\" },\n]\n\nexport interface SortSelectProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\"> {\n  value: string\n  onValueChange: (value: string) => void\n  items?: SortItem[]\n  /** Accessible label. Defaults to \"Sort by\". */\n  label?: string\n  size?: \"sm\" | \"md\"\n}\n\nconst SortSelect = React.forwardRef<HTMLDivElement, SortSelectProps>(\n  ({ className, value, onValueChange, items = defaultSortItems, label = \"Sort by\", size = \"md\", ...props }, ref) => {\n    const height = size === \"sm\" ? \"h-9\" : \"h-11\"\n\n    return (\n      <div\n        ref={ref}\n        className={cn(\n          \"relative inline-flex items-center rounded-full border border-input bg-background text-sm transition-colors focus-within:border-ring focus-within:ring-2 focus-within:ring-ring\",\n          height,\n          className\n        )}\n        {...props}\n      >\n        <ArrowUpDown className=\"pointer-events-none absolute left-4 h-4 w-4 text-muted-foreground\" />\n        <select\n          aria-label={label}\n          value={value}\n          onChange={(event) => onValueChange(event.target.value)}\n          className=\"h-full cursor-pointer appearance-none rounded-full bg-transparent pl-11 pr-10 font-medium focus-visible:outline-none\"\n        >\n          {items.map((item) => (\n            <option key={item.value} value={item.value}>\n              {item.label}\n            </option>\n          ))}\n        </select>\n        <ChevronDown className=\"pointer-events-none absolute right-4 h-4 w-4 text-muted-foreground\" />\n      </div>\n    )\n  }\n)\nSortSelect.displayName = \"SortSelect\"\n\nexport { SortSelect }\n",
+      "type": "registry:ui",
+      "target": "components/lumo/sort-select.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

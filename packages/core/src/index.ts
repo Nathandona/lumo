@@ -26,6 +26,13 @@ export * from './components/lumo/product-card'
 export * from './components/lumo/product-grid'
 export * from './components/lumo/variant-selector'
 
+// Discovery
+export * from './components/lumo/search-bar'
+export * from './components/lumo/sort-select'
+export * from './components/lumo/filter-panel'
+export * from './components/lumo/pagination'
+export * from './components/lumo/breadcrumbs'
+
 // Cart
 export * from './components/lumo/cart-line-item'
 export * from './components/lumo/cart-summary'
