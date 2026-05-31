@@ -4,8 +4,8 @@
   "description": "Storybook for Lumo UI components",
   "private": true,
   "scripts": {
-    "dev": "storybook dev -p 6006",
-    "build": "echo \"@lumo-ui/storybook: static build disabled pending a Storybook dependency fix (see SPEC.md follow-ups)\"",
+    "dev": "storybook dev -p 6006 --no-open",
+    "build": "storybook build --disable-telemetry",
     "serve": "http-server storybook-static --port 6006 --silent",
     "clean": "rm -rf storybook-static node_modules"
   },
@@ -21,15 +21,19 @@
     "@storybook/addon-interactions": "^8.4.2",
     "@storybook/addon-links": "^8.4.2",
     "@storybook/blocks": "^8.4.2",
+    "@storybook/react": "^8.4.2",
     "@storybook/react-vite": "^8.4.2",
     "@storybook/test": "^8.4.2",
+    "@tailwindcss/postcss": "^4.0.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "eslint": "^8.57.0",
     "eslint-config-next": "15.0.0",
     "eslint-plugin-storybook": "^0.9.0",
     "http-server": "^14.1.1",
+    "postcss": "^8.4.47",
     "storybook": "^8.4.2",
+    "tailwindcss": "^4.0.0",
     "typescript": "^5.6.2"
   }
 }

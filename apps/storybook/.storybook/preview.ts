@@ -1,4 +1,5 @@
 import type { Preview } from '@storybook/react'
+import './theme.css'
 
 const preview: Preview = {
   parameters: {
@@ -8,33 +9,13 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    // Lumo is light-only (Latin "lux" = light). No dark backgrounds.
     backgrounds: {
-      default: 'light',
+      default: 'cream',
       values: [
-        {
-          name: 'light',
-          value: '#ffffff',
-        },
-        {
-          name: 'dark',
-          value: '#333333',
-        },
+        { name: 'cream', value: '#FFFDF5' },
+        { name: 'white', value: '#FFFFFF' },
       ],
-    },
-  },
-  globalTypes: {
-    theme: {
-      description: 'Global theme for components',
-      defaultValue: 'light',
-      toolbar: {
-        title: 'Theme',
-        icon: 'paintbrush',
-        items: [
-          { value: 'light', title: 'Light' },
-          { value: 'dark', title: 'Dark' },
-        ],
-        dynamicTitle: true,
-      },
     },
   },
 }
