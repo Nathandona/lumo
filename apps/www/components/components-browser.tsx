@@ -3,44 +3,30 @@
 import * as React from "react"
 import { ComponentCard } from "@/components/component-card"
 import { SearchBar } from "@/components/search-bar"
+import { REGISTRY, CATEGORY_ORDER } from "@/lib/registry-meta"
 
-interface Comp {
-  id: string
-  name: string
-  description: string
-  category: string
-  tags: string[]
-  preview: string
-}
-
-const components: Comp[] = [
-  { id: "product-card", name: "Product Card", description: "Responsive product cards with variants, badges, and quick actions.", category: "E-commerce", tags: ["responsive", "badge", "interactive"], preview: "" },
-  { id: "cart-drawer", name: "Cart Drawer", description: "Accessible slide-over cart with line items and a summary.", category: "E-commerce", tags: ["dialog", "cart", "accessible"], preview: "" },
-  { id: "variant-selector", name: "Variant Selector", description: "Option picker that detects which variant combinations are available.", category: "E-commerce", tags: ["variants", "options", "interactive"], preview: "" },
-  { id: "price-display", name: "Price Display", description: "Formatted price with compare-at and discount support.", category: "E-commerce", tags: ["money", "currency", "discount"], preview: "" },
-  { id: "rating", name: "Rating Stars", description: "Accessible star rating with an optional review count.", category: "Feedback", tags: ["accessible", "rating", "compact"], preview: "" },
-  { id: "quantity-selector", name: "Quantity Stepper", description: "Accessible quantity input with increment and decrement controls.", category: "Forms", tags: ["input", "controls", "accessible"], preview: "" },
-  { id: "checkout-form", name: "Checkout Form", description: "Payment-agnostic checkout with validation, a payment slot, and order summary.", category: "Checkout", tags: ["form", "validation", "accessible"], preview: "" },
-  { id: "address-form", name: "Address Form", description: "Validated shipping address form that emits a normalized Address.", category: "Checkout", tags: ["form", "validation", "address"], preview: "" },
-  { id: "order-summary", name: "Order Summary", description: "Read-only order review with line items, totals, and tax.", category: "Checkout", tags: ["money", "review", "totals"], preview: "" },
-  { id: "order-confirmation", name: "Order Confirmation", description: "Post-purchase confirmation with order number and receipt.", category: "Checkout", tags: ["success", "receipt", "state"], preview: "" },
-]
-
-const categoryOrder = ["All", "E-commerce", "Checkout", "Forms", "Feedback", "Media", "Navigation"]
+const cards = REGISTRY.map((entry) => ({
+  id: entry.slug,
+  name: entry.title,
+  description: entry.description,
+  category: entry.category as string,
+  tags: entry.tags,
+  preview: "",
+}))
 
 export function ComponentsBrowser() {
   const [query, setQuery] = React.useState("")
-  const [category, setCategory] = React.useState("All")
+  const [category, setCategory] = React.useState<string>("All")
 
   const counts = React.useMemo(() => {
-    const map: Record<string, number> = { All: components.length }
-    for (const c of components) map[c.category] = (map[c.category] ?? 0) + 1
+    const map: Record<string, number> = { All: cards.length }
+    for (const c of cards) map[c.category] = (map[c.category] ?? 0) + 1
     return map
   }, [])
 
   const filtered = React.useMemo(() => {
     const q = query.trim().toLowerCase()
-    return components.filter((c) => {
+    return cards.filter((c) => {
       const inCategory = category === "All" || c.category === category
       const inQuery =
         !q ||
@@ -57,7 +43,7 @@ export function ComponentsBrowser() {
         <nav className="sticky top-28">
           <p className="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground/70">Categories</p>
           <ul className="space-y-1 border-l border-border">
-            {categoryOrder.map((name) => {
+            {CATEGORY_ORDER.map((name) => {
               const active = category === name
               return (
                 <li key={name}>
@@ -90,7 +76,7 @@ export function ComponentsBrowser() {
               ))}
             </div>
             <p className="mt-8 text-center text-sm text-muted-foreground">
-              {filtered.length} of {components.length} components
+              {filtered.length} of {cards.length} components
             </p>
           </>
         ) : (

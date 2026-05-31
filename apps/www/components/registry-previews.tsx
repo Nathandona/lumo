@@ -3,7 +3,12 @@
 import * as React from "react"
 import {
   ProductCard,
+  ProductGrid,
   CartDrawer,
+  CartLineItem,
+  CartSummary,
+  CartProvider,
+  useCart,
   VariantSelector,
   PriceDisplay,
   RatingStars,
@@ -41,6 +46,23 @@ const lamp: Product = {
   ],
 }
 
+const chair: Product = {
+  id: "2",
+  handle: "halo-chair",
+  title: "Halo Chair",
+  images: [
+    {
+      url: "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=600&h=600&fit=crop",
+      alt: "Halo chair",
+    },
+  ],
+  options: [],
+  rating: { value: 4.6, count: 54 },
+  variants: [
+    { id: "c1", price: { amount: 24900, currency: "USD" }, selectedOptions: [], available: true },
+  ],
+}
+
 const vsOptions = [{ name: "Size", values: ["S", "M", "L"] }]
 const vsVariants: Variant[] = [
   { id: "s", price: { amount: 5000, currency: "USD" }, selectedOptions: [{ name: "Size", value: "S" }], available: true },
@@ -48,17 +70,22 @@ const vsVariants: Variant[] = [
   { id: "l", price: { amount: 5000, currency: "USD" }, selectedOptions: [{ name: "Size", value: "L" }], available: false },
 ]
 
-const sampleLines: CartLine[] = [
-  {
-    id: "v1",
-    variant: lamp.variants[0],
-    product: { id: lamp.id, handle: lamp.handle, title: lamp.title, images: lamp.images },
-    quantity: 1,
-    lineTotal: { amount: 12900, currency: "USD" },
-  },
-]
+const lampRef = { id: lamp.id, handle: lamp.handle, title: lamp.title, images: lamp.images }
+
+const sampleLine: CartLine = {
+  id: "v1",
+  variant: lamp.variants[0],
+  product: lampRef,
+  quantity: 1,
+  lineTotal: { amount: 12900, currency: "USD" },
+}
+const sampleLines: CartLine[] = [sampleLine]
 const sampleSubtotal = { amount: 12900, currency: "USD" }
 const sampleTotal = { amount: 13932, currency: "USD" }
+
+function money(amount: number, currency = "USD") {
+  return (amount / 100).toLocaleString("en-US", { style: "currency", currency })
+}
 
 function VariantPreview() {
   const [value, setValue] = React.useState<SelectedOption[]>([{ name: "Size", value: "M" }])
@@ -70,21 +97,37 @@ function QuantityPreview() {
   return <QuantityStepper value={qty} onValueChange={setQty} min={1} max={9} />
 }
 
+function CartLineItemPreview() {
+  const [line, setLine] = React.useState<CartLine>(sampleLine)
+  if (!line) return null
+  return (
+    <div className="w-full max-w-sm">
+      <CartLineItem
+        line={line}
+        onQuantityChange={(_, quantity) =>
+          setLine((prev) => ({ ...prev, quantity, lineTotal: { ...prev.lineTotal, amount: prev.variant.price.amount * quantity } }))
+        }
+      />
+    </div>
+  )
+}
+
+function CartSummaryPreview() {
+  return (
+    <div className="w-full max-w-xs">
+      <CartSummary subtotal={sampleSubtotal} total={sampleTotal} onCheckout={() => {}} />
+    </div>
+  )
+}
+
 function CartDrawerPreview() {
   const [open, setOpen] = React.useState(false)
-  const line: CartLine = {
-    id: "v1",
-    variant: lamp.variants[0],
-    product: { id: lamp.id, handle: lamp.handle, title: lamp.title, images: lamp.images },
-    quantity: 1,
-    lineTotal: { amount: 12900, currency: "USD" },
-  }
   return (
     <CartDrawer
       open={open}
       onOpenChange={setOpen}
-      lines={[line]}
-      subtotal={{ amount: 12900, currency: "USD" }}
+      lines={sampleLines}
+      subtotal={sampleSubtotal}
       onCheckout={() => setOpen(false)}
       trigger={
         <button className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-transform active:scale-95">
@@ -95,18 +138,45 @@ function CartDrawerPreview() {
   )
 }
 
+function CartProviderDemo() {
+  const { lines, totalQuantity, subtotal, addLine, clear } = useCart()
+  return (
+    <div className="flex w-full max-w-xs flex-col items-center gap-4">
+      <div className="text-center">
+        <p className="font-display text-2xl font-semibold tracking-tight">{money(subtotal.amount, subtotal.currency)}</p>
+        <p className="text-sm text-muted-foreground">
+          {totalQuantity} item{totalQuantity === 1 ? "" : "s"} in cart
+        </p>
+      </div>
+      <div className="flex gap-2">
+        <button
+          onClick={() => addLine(lampRef, lamp.variants[0])}
+          className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-transform active:scale-95"
+        >
+          Add Aurora Lamp
+        </button>
+        <button
+          onClick={clear}
+          disabled={lines.length === 0}
+          className="rounded-full border border-[var(--stroke)] px-4 py-2.5 text-sm font-medium transition-colors hover:bg-accent disabled:opacity-50"
+        >
+          Clear
+        </button>
+      </div>
+    </div>
+  )
+}
+
+function CartProviderPreview() {
+  return (
+    <CartProvider>
+      <CartProviderDemo />
+    </CartProvider>
+  )
+}
+
 export function RegistryPreview({ id }: { id: string }) {
   switch (id) {
-    case "product-card":
-      return (
-        <div className="w-full max-w-[230px]">
-          <ProductCard product={lamp} />
-        </div>
-      )
-    case "cart-drawer":
-      return <CartDrawerPreview />
-    case "variant-selector":
-      return <VariantPreview />
     case "price-display":
       return (
         <PriceDisplay
@@ -115,10 +185,32 @@ export function RegistryPreview({ id }: { id: string }) {
           compareAtPrice={{ amount: 17900, currency: "USD" }}
         />
       )
-    case "rating":
+    case "rating-stars":
       return <RatingStars value={4.5} count={128} size="md" />
-    case "quantity-selector":
+    case "quantity-stepper":
       return <QuantityPreview />
+    case "variant-selector":
+      return <VariantPreview />
+    case "product-card":
+      return (
+        <div className="w-full max-w-[230px]">
+          <ProductCard product={lamp} />
+        </div>
+      )
+    case "product-grid":
+      return (
+        <div className="w-full max-w-md">
+          <ProductGrid products={[lamp, chair]} columns={2} />
+        </div>
+      )
+    case "cart-line-item":
+      return <CartLineItemPreview />
+    case "cart-summary":
+      return <CartSummaryPreview />
+    case "cart-drawer":
+      return <CartDrawerPreview />
+    case "cart-provider":
+      return <CartProviderPreview />
     case "address-form":
       return (
         <div className="w-full max-w-xs">
